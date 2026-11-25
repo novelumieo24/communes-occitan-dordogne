@@ -1,7 +1,28 @@
 <!doctype html>
 <html lang="fr">
 <meta charset="utf-8">
-<title>Noms occitans des communes de Dordogne</title>
+<title>Noms occitans des communes de Dordogne – carte à écouter</title>
+<meta name="description" content="Carte interactive des noms occitans des 557 communes de Dordogne : écoutez la prononciation, lisez l&#x27;histoire de chaque nom et retrouvez les lieux-dits en occitan. Novelum – IEO Perigòrd, en partenariat avec le Département de la Dordogne.">
+<link rel="canonical" href="https://novelumieo24.github.io/communes-occitan-dordogne/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Novelum – IEO Perigòrd">
+<meta property="og:title" content="Noms occitans des communes de Dordogne – carte à écouter">
+<meta property="og:description" content="Écoutez le nom occitan de chaque commune de Dordogne, lisez son histoire et retrouvez les lieux-dits en occitan.">
+<meta property="og:url" content="https://novelumieo24.github.io/communes-occitan-dordogne/">
+<meta property="og:image" content="https://novelumieo24.github.io/communes-occitan-dordogne/img/partage.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Carte des noms occitans des communes de Dordogne">
+<meta property="og:locale" content="fr_FR"><meta property="og:locale:alternate" content="oc_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Noms occitans des communes de Dordogne – carte à écouter">
+<meta name="twitter:description" content="Écoutez le nom occitan de chaque commune de Dordogne, lisez son histoire et retrouvez les lieux-dits en occitan.">
+<meta name="twitter:image" content="https://novelumieo24.github.io/communes-occitan-dordogne/img/partage.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icone-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Map", "name": "Noms occitans des communes de Dordogne", "alternateName": "Noms occitans de las comunas de Dordonha", "url": "https://novelumieo24.github.io/communes-occitan-dordogne/", "description": "Carte interactive des noms occitans des 557 communes de Dordogne : écoutez la prononciation, lisez l'histoire de chaque nom et retrouvez les lieux-dits en occitan. Novelum – IEO Perigòrd, en partenariat avec le Département de la Dordogne.", "inLanguage": ["fr", "oc"], "image": "https://novelumieo24.github.io/communes-occitan-dordogne/img/partage.png", "mapType": "https://schema.org/VenueMap", "about": {"@type": "AdministrativeArea", "name": "Dordogne", "alternateName": "Dordonha"}, "spatialCoverage": {"@type": "Place", "name": "Dordogne, France"}, "publisher": {"@type": "Organization", "name": "Novelum – IEO Perigòrd", "url": "https://www.novelum-ieo24.fr"}, "contributor": {"@type": "GovernmentOrganization", "name": "Département de la Dordogne", "url": "https://www.dordogne.fr"}, "citation": "Jean Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020", "isAccessibleForFree": true}</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="manifest" href="manifest.json">
@@ -9,8 +30,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Noms occitans">
-<link rel="apple-touch-icon" href="img/icone.png">
-<link rel="icon" href="img/icone-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
 <style>
@@ -152,7 +171,7 @@ body.big .lab{font-weight:700}
 #fBtn,#pays{display:none!important}
 .search input,.search:has(.fbtn.act) input{padding-right:140px!important}
 @media (max-width:1180px){.search input,.search:has(.fbtn.act) input{padding-right:52px!important}}
-@media (max-width:1400px) and (min-width:861px){header{flex-wrap:wrap}.brand{flex:1 1 auto}.search{order:5;flex:1 1 100%!important;max-width:none!important;margin-left:0!important}.locbtn span{display:inline}.search input,.search:has(.fbtn.act) input{padding-right:140px!important}}
+@media (max-width:1700px) and (min-width:861px){header{flex-wrap:wrap}.brand{flex:1 1 auto}.search{order:5;flex:1 1 100%!important;max-width:none!important;margin-left:0!important}.locbtn span{display:inline}.search input,.search:has(.fbtn.act) input{padding-right:140px!important}}
 /* formes anciennes déroulables */
 .fold-h{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;padding:10px 0;margin-top:14px;border-top:1px solid var(--line);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--plum);font-weight:800;text-align:left}
 .fold-h small{letter-spacing:0;text-transform:none;font-size:12px;color:#fff;background:var(--plum);border-radius:10px;padding:1px 8px;font-weight:700}
@@ -423,6 +442,49 @@ body.placing #card{opacity:.35;pointer-events:none}
   .demo{left:auto;right:12px;transform:none;font-size:9.5px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* carte affichée dans une page (Wix) : version allégée */
+body.embed .brand{display:none}
+body.embed header{min-height:56px;padding:8px 14px}
+body.embed .search{margin-left:0}
+#fsBtn{display:none} body.fs-ok #fsBtn{display:grid}
+body.isfs #fsBtn{background:var(--slate);color:#fff}
+/* toutes les largeurs : les boutons de la carte restent au-dessus des sources */
+@media (min-width:861px){.tools{bottom:calc(var(--fh,40px) + 26px)} #layers{bottom:calc(var(--fh,40px) + 26px)}}
+@media (max-width:860px){
+  .foot .cr{max-width:62vw;line-height:1.5}
+  #pdfBtn{display:none}
+}
+@media (max-width:860px) and (max-height:760px){.tools{gap:6px}.tools .lyrbtn,.tools .zoom button{width:38px;height:38px}}
+#instBtn{width:100%;justify-content:center;margin-top:12px}
+#instBtn[hidden],.insthelp[hidden]{display:none!important}
+.insthelp{margin-top:10px;padding:10px 12px;background:var(--plum-l);border-radius:8px;font-size:13.5px;line-height:1.45}
+/* sources repliées : une ligne de liens, le détail d'un clic */
+.foot .cr{font-size:10.5px!important;max-width:min(640px,calc(100vw - 420px))}
+.foot .cr [data-t=credits]{display:none}
+.foot .cr.open [data-t=credits]{display:block;margin-bottom:4px;text-align:left}
+.srcbtn{border:0;background:none;padding:0;color:var(--plum);font-size:inherit;font-weight:700;text-decoration:underline}
+.srcbtn::after{content:" ▸";text-decoration:none;display:inline-block;margin-right:4px}
+.cr.open .srcbtn::after{content:" ▾"}
+.demo{top:var(--hh,68px);bottom:auto!important;border-radius:0 0 8px 8px}
+body.admin .demo{top:calc(var(--hh,68px) + 36px)}
+@media (max-width:860px){.demo{left:12px!important;right:auto!important;transform:none!important}
+  body.card-open .demo,body.full-open .demo{display:none}}
+body.touch #tip{display:none!important}
+@media (max-width:860px){.foot .cr{max-width:calc(100vw - 150px)}}
+/* sur écran tactile, pas d'effet de survol qui reste collé après un toucher */
+body.touch .zoom button:hover,body.touch .lyrbtn:not([aria-expanded=true]):hover{background:#fff}
+body.touch #list li button:hover{border-color:var(--line)}
+body.touch .results li:hover:not([aria-selected=true]){background:none}
+/* bandeau de titre plus grand (Nicolas, 25/11/2026) */
+header{padding-top:16px;padding-bottom:16px}
+.brand h1{font-size:26px!important;line-height:1.12}
+.brand .subt{font-size:16px!important;margin-top:4px}
+.mini{width:66px!important;height:72px!important;margin:-4px 0!important}
+@media (max-width:1180px) and (min-width:861px){.brand h1{font-size:21px!important}.brand .subt{font-size:14px!important}}
+@media (max-width:860px) and (max-height:620px){.tools #zi,.tools #zo{display:none}}
+@media (max-width:860px){header{padding:14px 12px}.brand h1{font-size:19px!important}.brand .subt{font-size:13.5px!important}.mini{width:44px!important;height:48px!important}}
+@media (max-width:420px){.brand h1{font-size:17.5px!important}.brand .subt{font-size:12.5px!important;margin-top:2px}.mini{width:36px!important;height:40px!important}}
 </style>
 <div class="demo" data-t="demo" data-tg="Bas de page" data-tl="Bandeau « maquette »">MAQUETTE · données non relues</div>
 
@@ -452,6 +514,7 @@ body.placing #card{opacity:.35;pointer-events:none}
 <div class="adminbar" role="status"><span><span class="long" id="admInfo">Administration · les changements sont enregistrés dans le fichier modifications.json</span><span class="short">Administration (démo)</span></span><button id="admTx">✎ Textes de la page</button><button id="admReset">Effacer mes modifications</button><button id="admOff">Quitter</button></div>
 
 <main>
+<noscript><p>Cette carte a besoin de JavaScript. <a href="communes.html">Voir la liste des noms occitans des communes de Dordogne</a>.</p></noscript>
   <div id="map" aria-label="Carte des communes de la Dordogne. Utilisez la recherche ou la vue Liste pour naviguer au clavier."></div>
   <section id="list" aria-labelledby="lt"><div class="wrap">
     <h2 id="lt" data-t="liste_titre" data-tg="Liste des communes" data-tl="Titre de la liste">Toutes les communes</h2>
@@ -495,6 +558,7 @@ body.placing #card{opacity:.35;pointer-events:none}
 <div id="toast" class="toast" role="status" hidden></div>
 <div class="tools">
   <a class="lyrbtn" id="pdfBtn" href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener" aria-label="Télécharger la carte en PDF (grand format A0)" title="Télécharger la carte en PDF"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 19h14"/></svg></a>
+  <button class="lyrbtn" id="fsBtn" aria-label="Plein écran" title="Plein écran"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
   <button class="lyrbtn" id="rndBtn" aria-label="Une commune au hasard" title="Une commune au hasard"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.3" fill="currentColor"/><circle cx="15" cy="15" r="1.3" fill="currentColor"/><circle cx="15" cy="9" r="1.3" fill="currentColor"/><circle cx="9" cy="15" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></svg></button>
   <button class="lyrbtn" id="geoBtn" aria-label="Me localiser" title="Me localiser"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></button>
   <button class="lyrbtn" id="lyrBtn" aria-expanded="false" aria-controls="layers" aria-label="Couches de la carte" title="Couches"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5-10-5z"/><path d="m2 13 10 5 10-5"/></svg></button>
@@ -536,6 +600,8 @@ body.placing #card{opacity:.35;pointer-events:none}
   <p class="hbonus">Envie de découvrir ? Le bouton <span class="hdice" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.3" fill="currentColor"/><circle cx="15" cy="15" r="1.3" fill="currentColor"/><circle cx="15" cy="9" r="1.3" fill="currentColor"/><circle cx="9" cy="15" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></svg></span> fait entendre une commune au hasard.</p>
   <button class="play hgo" id="hGo">C’est parti</button>
   <button class="hlink" id="hMore">Tout savoir sur la carte</button>
+  <button class="ghost instbtn" id="instBtn" type="button" hidden>📲 Installer l’appli sur mon téléphone</button>
+  <div class="insthelp" id="instHelp" hidden><b>Sur iPhone ou iPad :</b> touchez <span aria-hidden="true">⎙</span> <b>Partager</b> en bas de Safari, puis <b>« Sur l’écran d’accueil »</b>. La carte s’ouvrira comme une appli.</div>
 </div></div>
 <div id="pays" class="pays" role="group" aria-labelledby="paysT">
   <span class="ptl" id="paysT" data-fr="Afficher le Périgord" data-oc="Afichar lo Perigòrd">Afficher le Périgord</span>
@@ -554,7 +620,7 @@ body.placing #card{opacity:.35;pointer-events:none}
     
     <div class="partner"><span><span data-t="part1" data-tg="Bas de page" data-tl="Partenariat, 1re ligne">Novelum – IEO Perigòrd</span><br><span data-t="part2" data-tg="Bas de page" data-tl="Partenariat, 2e ligne">en partenariat avec le Département de la Dordogne</span></span><img src="img/novelum.png" alt="Novelum – IEO Perigòrd" width="44" height="44" style="height:44px"><a class="dep-link" href="https://www.dordogne.fr" target="_blank" rel="noopener" title="dordogne.fr"><img src="img/dordonha.png" alt="Dordonha Perigòrd, lo Departament : site du Département (nouvelle fenêtre)" width="220" height="94"></a></div>
   </div>
-  <div class="cr"><span data-t="credits" data-tg="Bas de page" data-tl="Sources et crédits (en bas à droite)">Fonds : IGN Géoplateforme · Lieux-dits et rues en occitan © OpenStreetMap (ODbL) · Noms des communes : J. Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020</span> · <span class="infolinks"><a href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener">Télécharger la carte (PDF)</a> · <button id="lnkUsage">Comment utiliser la carte</button> · <button id="lnkLegal">Mentions légales et cookies</button></span> · <button class="adminlink" id="admOn" hidden style="display:none">Administration</button></div>
+  <div class="cr"><button class="srcbtn" id="srcBtn" type="button" aria-expanded="false" aria-controls="credTxt">Sources</button><span id="credTxt" data-t="credits" data-tg="Bas de page" data-tl="Sources et crédits (en bas à droite)">Fonds : IGN Géoplateforme · Lieux-dits et rues en occitan © OpenStreetMap (ODbL) · Noms des communes : J. Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020</span> · <span class="infolinks"><a href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener">Télécharger la carte (PDF)</a> · <a href="communes.html">Liste des communes</a> · <button id="lnkUsage">Comment utiliser la carte</button> · <button id="lnkLegal">Mentions légales et cookies</button></span> · <button class="adminlink" id="admOn" hidden style="display:none">Administration</button></div>
 </div>
 
 <audio id="au" preload="none"></audio>
@@ -567,7 +633,9 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 let sel=null, LANG=store.get("noms.lang")||"oc";
 const card=$("#card"), full=$("#full");
-const HD=document.querySelector("header"); const setHH=()=>{document.documentElement.style.setProperty("--hh",HD.offsetHeight+"px"); const se=document.querySelector(".search"); if(se) document.documentElement.style.setProperty("--sl",se.getBoundingClientRect().left+"px")}; setHH(); window.addEventListener("resize",setHH);
+const EMBED=(()=>{try{return window.self!==window.top}catch(e){return true}})();
+if(EMBED){document.body.classList.add("embed"); if(document.fullscreenEnabled||document.webkitFullscreenEnabled) document.body.classList.add("fs-ok")}
+const HD=document.querySelector("header"); const setHH=()=>{document.documentElement.style.setProperty("--hh",HD.offsetHeight+"px"); const fc=document.querySelector(".foot .cr"); if(fc) document.documentElement.style.setProperty("--fh",fc.offsetHeight+"px"); const se=document.querySelector(".search"); if(se) document.documentElement.style.setProperty("--sl",se.getBoundingClientRect().left+"px")}; setHH(); window.addEventListener("resize",setHH); if(window.ResizeObserver){const fc=document.querySelector(".foot .cr"); fc&&new ResizeObserver(setHH).observe(fc)}
 
 /* ---------- Textes modifiables ---------- */
 const TXD={
@@ -1247,6 +1315,7 @@ $("#hGo").onclick=()=>{help.hidden=true; try{localStorage.setItem("noms.vu","1")
 help.addEventListener("click",e=>{if(e.target===help) $("#hGo").click()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!help.hidden) $("#hGo").click()});
 function openInfo(which){showMap(); document.body.classList.add("pageview"); closeCard(); const pg=$("#info"); pg.classList.add("on"); $("#infoUsage").hidden=which!=="usage"; $("#infoLegal").hidden=which!=="legal"; pg.scrollTop=0; $("#infoBack").focus()}
+{const sb=$("#srcBtn"); sb.onclick=()=>{const o=sb.parentNode.classList.toggle("open"); sb.setAttribute("aria-expanded",o)}}
 $("#lnkUsage").onclick=()=>openInfo("usage"); $("#lnkLegal").onclick=()=>openInfo("legal");
 $("#hMore").onclick=()=>{$("#hGo").click(); openInfo("usage")};
 $("#infoBack").onclick=()=>showMap();
@@ -1284,6 +1353,25 @@ function count(){const withF=items.filter(it=>it.f).length; const nSon=items.red
   $("#cnt").textContent=withF+" noms de communes · "+nSon+" prononciations · "+MT.length+" lieux nommés"}
 count();
 
+{const fb=$("#fsBtn"), fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+ fb.onclick=()=>{const d=document.documentElement; if(fsEl()) (document.exitFullscreen||document.webkitExitFullscreen).call(document); else (d.requestFullscreen||d.webkitRequestFullscreen).call(d)};
+ const fsChg=()=>{const on=!!fsEl(); document.body.classList.toggle("isfs",on); fb.setAttribute("aria-label",on?"Quitter le plein écran":"Plein écran"); fb.title=fb.getAttribute("aria-label"); setTimeout(()=>{setHH(); map.invalidateSize()},150)};
+ document.addEventListener("fullscreenchange",fsChg); document.addEventListener("webkitfullscreenchange",fsChg)}
+/* téléphone / tablette : on touche au lieu de cliquer, pas de survol */
+const TOUCH=matchMedia("(hover: none)").matches||matchMedia("(pointer: coarse)").matches;
+if(TOUCH){document.body.classList.add("touch");
+  const tw=root=>{if(!root) return; const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT); let n; while(n=w.nextNode()){const t=n.nodeValue.replace(/\bCliquez sur\b/g,"Touchez").replace(/\bcliquez sur\b/g,"touchez").replace(/\bCliquez\b/g,"Touchez").replace(/\bcliquez\b/g,"touchez").replace(/\bUn clic\b/g,"Un toucher").replace(/\bun clic\b/g,"un toucher"); if(t!==n.nodeValue) n.nodeValue=t}};
+  setTimeout(()=>{tw($("#help")); tw($("#infoUsage"))},0)}
+/* appli installable (téléphone) */
+{let ask=null; const ib=$("#instBtn"), ih=$("#instHelp");
+ const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+ const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+ if(!standalone&&!EMBED&&location.protocol==="https:"){
+   window.addEventListener("beforeinstallprompt",e=>{e.preventDefault(); ask=e; ib.hidden=false});
+   if(ios) ib.hidden=false;
+   ib.onclick=()=>{if(ask){ask.prompt(); ask.userChoice.finally(()=>{ask=null; ib.hidden=true})} else ih.hidden=!ih.hidden};
+   window.addEventListener("appinstalled",()=>{ib.hidden=true; ih.hidden=true})}
+ if("serviceWorker" in navigator&&location.protocol==="https:") navigator.serviceWorker.register("sw.js").catch(()=>{})}
 setBase(base); setLang(LANG);
 const h=location.hash.slice(1); if(h&&byId[h]) setTimeout(()=>choose(byId[h]),300);
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(h&&byId[h]&&byId[h]!==sel) choose(byId[h])});
