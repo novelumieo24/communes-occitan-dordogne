@@ -490,7 +490,7 @@ body.placing #card{opacity:.35;pointer-events:none}
   .brand h1{font-size:15px}.brand p{display:none}.mini{width:36px;height:40px}
   .partner span{display:none}.partner img{height:30px}.partner{padding:5px 8px}
 
-  .brand{order:1;flex:1 1 55%}.seg.lang+.seg{order:2}
+  .brand{order:1;flex:1 1 55%}.seg.lang+.seg,.navcol{order:2}
   .seg button{padding:7px 10px;font-size:12.5px}
   .search{order:3;flex:1 1 55%;min-width:0;max-width:none}
   .seg.lang{order:4}
@@ -625,13 +625,28 @@ html,body{max-width:100%;overflow-x:hidden}
 #instBtn2{margin-top:12px;width:100%;justify-content:center}
 #instBtn2[hidden]{display:none!important}
 /* bouton « Avoir l'appli sur mon téléphone » : une action, pas un onglet */
-.appbtn{flex:none;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border:0;border-radius:20px;background:var(--lime);color:var(--slate);font-weight:800;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.navcol{display:flex;flex-direction:column;align-items:flex-start;gap:8px;flex:none}
+.appbtn{flex:none;display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;border:0;border-radius:20px;background:var(--lime);color:var(--slate);font-weight:800;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .appbtn:hover{background:#DDE272}
 .appbtn[aria-pressed=true]{background:#fff}
 @media (max-width:700px){.appgrid{grid-template-columns:1fr}.appgrid .qrbox{grid-row:auto}}
 @media (max-width:860px){.qrbox{display:none}.appgrid{grid-template-columns:1fr}#vMob{display:none}.apphero img{width:64px;height:64px}.apphero h2{font-size:21px!important}}
 /* étiquette « modifié » : seulement pour l'Administration, jamais pour le public */
 body:not(.admin) .modif{display:none!important}
+/* « Une question, une remarque ? » */
+.asklink{display:block;border:0;background:none;padding:6px 0 0;margin-top:6px;color:var(--plum);font-weight:700;font-size:13.5px;text-decoration:underline;text-align:left;cursor:pointer}
+.full .asklink{margin-top:14px;font-size:14.5px}
+.askform{position:relative;max-width:480px;max-height:92vh;overflow:auto}
+.askform label{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--plum);margin:12px 0 5px}
+.askform label small{text-transform:none;letter-spacing:0;font-weight:600;color:var(--muted)}
+.askform input,.askform select,.askform textarea{width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:16px;background:#fff}
+.askform textarea{resize:vertical;min-height:110px;line-height:1.45}
+.askform input:focus,.askform select:focus,.askform textarea:focus{outline:none;border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-l)}
+.askx{position:absolute;right:12px;top:12px;width:34px;height:34px;border:0;border-radius:8px;background:var(--bg);font-size:16px}
+.askerr{color:#A3302A;font-weight:700;margin:8px 0 0;min-height:1em;font-size:14px}
+.asknote{font-size:12.5px;color:var(--muted);margin:10px 0 0;text-align:center}
+#askSend{margin-top:10px}
+@media (max-width:860px){#card .asklink{padding-top:4px;margin-top:4px;font-size:13px}}
 /* dé « commune au hasard » retiré (Nicolas, 25/11/2026) */
 #rndBtn,.hbonus{display:none!important}
 </style>
@@ -654,12 +669,14 @@ body:not(.admin) .modif{display:none!important}
     <button id="lFr" aria-pressed="false"><span class="long" data-t="btn_fr" data-tg="En-tête et onglets" data-tl="Bouton de langue : français">Français</span><span class="short" aria-hidden="true">FR</span></button>
     <button id="lOc" aria-pressed="true" lang="oc"><span class="long" data-t="btn_oc" data-tg="En-tête et onglets" data-tl="Bouton de langue : occitan">Occitan</span><span class="short" aria-hidden="true">OC</span></button>
   </div>
-  <div class="seg" role="group" aria-label="Affichage">
+  <div class="navcol"><div class="seg" role="group" aria-label="Affichage">
     <button id="vMap" aria-pressed="true" data-t="onglet_carte" data-tg="En-tête et onglets" data-tl="Onglet « Carte »">Carte</button>
     <button id="vList" aria-pressed="false" data-t="onglet_liste" data-tg="En-tête et onglets" data-tl="Onglet « Liste »">Liste</button>
     <button id="vPron" aria-pressed="false" data-t="onglet_pron" data-tg="En-tête et onglets" data-tl="Onglet « Prononciation »">Prononciation</button>
   </div>
-  <button id="vMob" class="appbtn" type="button" aria-pressed="false" title="Installer la carte sur votre téléphone, comme une application"><span aria-hidden="true">📲</span> Installer l’application mobile</button>
+    <button id="vMob" class="appbtn" type="button" aria-pressed="false" title="Installer la carte sur votre téléphone, comme une application"><span aria-hidden="true">📲</span> Installer l’application mobile</button>
+  </div>
+
 </header>
 <div class="adminbar" role="status"><span><span class="long" id="admInfo">Administration · les changements sont enregistrés dans le fichier modifications.json</span><span class="short">Administration (démo)</span></span><button id="admTx">✎ Textes de la page</button><button id="admReset">Effacer mes modifications</button><button id="admOff">Quitter</button></div>
 
@@ -707,7 +724,7 @@ body:not(.admin) .modif{display:none!important}
 <h3>Contenus et droits</h3><p>Noms occitans des communes, prononciations notées, formes anciennes et explications : Jean Roux, <i>Dictionnaire toponymique des communes de Dordogne</i>, édition préparée par Jean-Louis Lévêque et Etienne Roux, © Novelum – IEO Perigòrd et Lo Congrès permanent de la lenga occitana, 2020. Toute reproduction demande leur accord.</p>
 <p>Enregistrements sonores : collection Novelum. Les personnes enregistrées ne sont pas nommées ; leurs voix ne peuvent pas être réutilisées sans autorisation.</p>
 <p>Contours des communes : IGN et INSEE, Licence Ouverte (Etalab). Fonds de carte : IGN Géoplateforme ; OpenStreetMap et rendu occitan d’OpenStreetMap. Lieux-dits, rues et rivières en occitan : © contributeurs d’OpenStreetMap, licence ODbL.</p>
-<h3>Données personnelles</h3><p>Le site ne demande aucun compte et ne collecte aucune donnée personnelle. La position utilisée par « Me localiser », si vous l’autorisez, reste dans votre navigateur. Quand vous cherchez une rue, le texte tapé est envoyé au service d’adresses de l’IGN (Géoplateforme) pour la trouver ; rien d’autre n’est transmis. Pour exercer vos droits ou poser une question : [contact à compléter].</p>
+<h3>Données personnelles</h3><p>Le site ne demande aucun compte et ne collecte aucune donnée personnelle. La position utilisée par « Me localiser », si vous l’autorisez, reste dans votre navigateur. Quand vous cherchez une rue, le texte tapé est envoyé au service d’adresses de l’IGN (Géoplateforme) pour la trouver ; rien d’autre n’est transmis. Le bouton « Une question, une remarque ? » envoie votre message par e-mail à Novelum – IEO Perigòrd, par l’intermédiaire du service d’envoi Web3Forms ; votre nom et votre e-mail sont facultatifs et servent seulement à vous répondre, ils ne sont pas publiés. Pour exercer vos droits ou poser une question : [contact à compléter].</p>
 <h3>Cookies</h3><p>Le site n’utilise ni cookie publicitaire ni outil de mesure d’audience. Il garde seulement, dans votre navigateur, quelques réglages pratiques : la langue choisie, « texte plus grand » et le fait d’avoir déjà vu le mode d’emploi. Ces réglages ne servent qu’à vous et ne sont transmis à personne ; vous pouvez les effacer depuis les réglages de votre navigateur. C’est pourquoi aucun bandeau de consentement n’est affiché.</p>
 <p>Les fonds de carte sont chargés depuis les serveurs de l’IGN et d’OpenStreetMap, qui reçoivent donc, comme pour tout site, l’adresse technique (IP) de votre appareil.</p>
 <p class="psrc">Maquette : ces mentions sont à faire relire et compléter avant la mise en ligne.</p></div>
@@ -723,6 +740,21 @@ body:not(.admin) .modif{display:none!important}
 
 <div id="placeMsg" class="placemsg" role="status" hidden><span></span><button id="placeCancel">Annuler</button></div>
 <div id="toast" class="toast" role="status" hidden></div>
+<div id="askBox" class="help" role="dialog" aria-modal="true" aria-labelledby="askT" hidden><form class="hbox askform" novalidate>
+  <button type="button" class="askx" aria-label="Fermer">✕</button>
+  <h2 id="askT">Une question, une remarque ?</h2>
+  <p class="hsub">Votre message est envoyé directement à l’équipe de Novelum – IEO Perigòrd.</p>
+  <label for="askCom">Commune</label><input id="askCom" type="text" autocomplete="off">
+  <label for="askType">C’est…</label>
+  <select id="askType"><option>Une question</option><option>Une erreur à signaler</option><option>Je peux enregistrer le nom en occitan</option><option>Autre chose</option></select>
+  <label for="askMsg">Votre message</label><textarea id="askMsg" rows="5" required placeholder="Par exemple : chez nous, on prononce plutôt…"></textarea>
+  <label for="askName">Votre nom <small>(facultatif)</small></label><input id="askName" type="text" autocomplete="name">
+  <label for="askMail">Votre e-mail <small>(facultatif, pour recevoir une réponse)</small></label><input id="askMail" type="email" autocomplete="email" inputmode="email">
+  <input type="checkbox" name="botcheck" id="askBot" tabindex="-1" autocomplete="off" style="display:none">
+  <p class="askerr" role="alert"></p>
+  <button class="play hgo" type="submit" id="askSend">Envoyer</button>
+  <p class="asknote">Votre message n’est pas publié sur la carte. Votre e-mail sert seulement à vous répondre.</p>
+</form></div>
 <div class="tools">
   <a class="lyrbtn" id="pdfBtn" href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener" aria-label="Télécharger la carte en PDF (grand format A0)" title="Télécharger la carte en PDF"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 19h14"/></svg></a>
   <button class="lyrbtn" id="fsBtn" aria-label="Plein écran" title="Plein écran"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
@@ -1044,6 +1076,14 @@ function shareIt(it){const url=location.origin+location.pathname+"#"+it.p.id, oc
   if(navigator.share){navigator.share({title:titre,text:texte,url}).catch(()=>{}); return}
   const ok=()=>toast("Lien copié : collez-le dans un message ou un e-mail.");
   if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(ok,()=>prompt("Copiez ce lien :",url)); else prompt("Copiez ce lien :",url)}
+/* ---------- « Une question, une remarque ? » : e-mail direct à Novelum (Web3Forms) ---------- */
+const ASK_KEY="3f2bd908-2497-4a56-9507-c7215d606d73";
+let askFrom=null;
+function openAsk(it){const box=$("#askBox"); askFrom=document.activeElement;
+  $("#askCom").value=it?(it.p.fr+(it.f&&it.f.oc?" ("+it.f.oc+")":"")):""; $("#askMsg").value=""; box.querySelector(".askerr").textContent="";
+  const b=$("#askSend"); b.disabled=false; b.textContent="Envoyer"; box.hidden=false; setTimeout(()=>$("#askMsg").focus(),50)}
+function closeAsk(){$("#askBox").hidden=true; askFrom&&askFrom.focus&&askFrom.focus()}
+document.addEventListener("DOMContentLoaded",()=>{});
 function showCard(it){
   const f=it.f, n=nPlaces(it);
   card.innerHTML=`<button class="x" aria-label="Fermer">✕</button>
@@ -1057,6 +1097,7 @@ function showCard(it){
    <button class="ghost" data-zoom title="Zoomer sur la commune">🔍 Zoomer</button>
    <button class="ghost" data-share title="Partager cette commune">${SHARE_ICO} Partager</button>
    <button class="ghost edit" data-edit>✎ Modifier</button></div>
+   <button class="asklink" data-ask type="button">✉️ Une question, une remarque ?</button>
    ${seeingHTML(it)}
    ${f&&f.verif?`<div class="soon">${esc(f.verif)}</div>`:""}
    ${f?"":`<div class="soon">${esc(T("vig_soon"))}</div>`}`;
@@ -1067,6 +1108,7 @@ function showCard(it){
   const mb=card.querySelector("[data-more]"); if(mb) mb.onclick=()=>openFull(it);
   const zb=card.querySelector("[data-zoom]"); if(zb) zb.onclick=()=>choose(it,"fort",false);
   const sb=card.querySelector("[data-share]"); if(sb) sb.onclick=()=>shareIt(it);
+  const askb=card.querySelector("[data-ask]"); if(askb) askb.onclick=()=>openAsk(it);
   card.querySelector("[data-edit]").onclick=()=>openEdit(it);
   const lb=card.querySelector("[data-list]"); if(lb) lb.onclick=()=>{if(window.innerWidth<=860) setTimeout(()=>{if(sel===it&&it.layer) map.flyToBounds(it.layer.getBounds(),{paddingTopLeft:[20,14],paddingBottomRight:[20,card.offsetHeight+14],maxZoom:15,duration:0.5})},120); listOpen=!listOpen; const l=card.querySelector(".mtlist"); l.hidden=!listOpen; lb.setAttribute("aria-expanded",listOpen); lb.textContent=listOpen?T("vig_masquer"):T("vig_liste",it.mt.h.length+it.mt.r.length+it.mt.o.length);
     if(!listOpen){HI=PIN=null; microOff()} else microOn(); maskOn(listOpen?it:null); refresh()};
@@ -1131,8 +1173,9 @@ function openFull(it,sync){
        <span class="transc">${esc(T("fiche_entend"))} <b lang="oc">${esc(f.oc)}</b> ${esc(ipa(f))}</span>
        <button class="ghost edit" data-edit>✎ Modifier</button></div></div>
    <div class="body">${els}
-     <div class="src"><b>Source</b> : Jean Roux, <i>Dictionnaire toponymique des communes de Dordogne</i>, édition préparée par Jean-Louis Lévêque et Etienne Roux, Novelum – IEO Perigòrd & Lo Congrès permanent de la lenga occitana, 2020${f.els[0]&&f.els[0].page?", p. "+esc(f.els[0].page):""}.<br>Enregistrement : collection Novelum, locuteur non nommé.</div></div>`;
-  full.classList.add("on"); full.querySelector(".x").onclick=closeFull; full.querySelector("[data-edit]").onclick=()=>openEdit(it);
+     <div class="src"><b>Source</b> : Jean Roux, <i>Dictionnaire toponymique des communes de Dordogne</i>, édition préparée par Jean-Louis Lévêque et Etienne Roux, Novelum – IEO Perigòrd & Lo Congrès permanent de la lenga occitana, 2020${f.els[0]&&f.els[0].page?", p. "+esc(f.els[0].page):""}.<br>Enregistrement : collection Novelum, locuteur non nommé.</div>
+     <button class="asklink" data-ask type="button">✉️ Une question, une remarque sur ce nom ?</button></div>`;
+  full.classList.add("on"); full.querySelector(".x").onclick=closeFull; {const a=full.querySelector("[data-ask]"); if(a) a.onclick=()=>openAsk(it)} full.querySelector("[data-edit]").onclick=()=>openEdit(it);
   full.querySelectorAll("[data-play]").forEach(pb=>pb.onclick=()=>playBtn(pb,it.snd[+pb.dataset.play].f));
   {const pf=full.querySelector("[data-playfr]"); if(pf) pf.onclick=()=>playBtn(pf,it.raw.sonfr[0].f)}
   full.querySelectorAll(".fold-h").forEach(b=>b.onclick=()=>{const o=b.nextElementSibling.classList.toggle("open"); b.setAttribute("aria-expanded",o)});
@@ -1470,6 +1513,21 @@ $("#game").addEventListener("click",e=>{const g=$("#game"); if(g.classList.conta
 if(!$("#game").hidden){startGame(); if(window.innerWidth<=860) $("#gMin").click()}
 
 
+{const box=$("#askBox"), f=box.querySelector("form"), err=box.querySelector(".askerr"), b=$("#askSend");
+ box.querySelector(".askx").onclick=closeAsk; box.addEventListener("click",e=>{if(e.target===box) closeAsk()});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!box.hidden) closeAsk()});
+ f.onsubmit=e=>{e.preventDefault(); err.textContent="";
+  const msg=$("#askMsg").value.trim(), mail=$("#askMail").value.trim(), com=$("#askCom").value.trim(), typ=$("#askType").value;
+  if(msg.length<3){err.textContent="Écrivez votre message."; $("#askMsg").focus(); return}
+  if(mail&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)){err.textContent="L’adresse e-mail ne semble pas complète."; $("#askMail").focus(); return}
+  b.disabled=true; b.textContent="Envoi…";
+  const data={access_key:ASK_KEY, subject:"[Carte des noms occitans] "+typ+(com?" – "+com:""), from_name:"Carte des noms occitans (Novelum)",
+    "Type":typ, "Commune":com||"(aucune)", "Message":msg, "Nom":$("#askName").value.trim()||"(non donné)", "E-mail":mail||"(non donné)",
+    "Page":location.href, botcheck:$("#askBot").checked};
+  if(mail) data.email=mail;
+  fetch("https:\/\/api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)})
+   .then(r=>r.json()).then(j=>{if(!j.success) throw 0; closeAsk(); toast("Merci ! Votre message a bien été envoyé à Novelum – IEO Perigòrd.")})
+   .catch(()=>{err.textContent="L’envoi n’a pas marché (connexion ?). Réessayez dans un moment."; b.disabled=false; b.textContent="Envoyer"})}}
 /* ---------- Mode d'emploi, hasard, pays, texte plus grand ---------- */
 var PAYS="";
 function showPays(){
