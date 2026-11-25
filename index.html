@@ -482,6 +482,12 @@ header{padding-top:16px;padding-bottom:16px}
 @media (max-width:860px) and (max-height:620px){.tools #zi,.tools #zo{display:none}}
 @media (max-width:860px){header{padding:14px 12px}.brand h1{font-size:19px!important}.brand .subt{font-size:13.5px!important}.mini{width:44px!important;height:48px!important}}
 @media (max-width:420px){.brand h1{font-size:17.5px!important}.brand .subt{font-size:12.5px!important;margin-top:2px}.mini{width:36px!important;height:40px!important}}
+
+/* dans une page (Wix) : faire défiler une fiche ou une liste ne fait jamais défiler la page autour */
+html,body{overscroll-behavior:none}
+#full,#card,#list,#pron,.infopage,.results,.mtlist,.mtlist2,#layers,.linesbox{overscroll-behavior:contain}
+/* dé « commune au hasard » retiré (Nicolas, 25/11/2026) */
+#rndBtn,.hbonus{display:none!important}
 </style>
 <div class="demo" data-t="demo" data-tg="Bas de page" data-tl="Bandeau « maquette »">MAQUETTE · données non relues</div>
 
@@ -525,7 +531,6 @@ header{padding-top:16px;padding-bottom:16px}
 <h3>Chercher une commune</h3><p>Tapez le nom dans la case en haut, en français ou en occitan, avec ou sans accents : « peiregòrd », « sarlat », « brageirac »… Choisissez une proposition avec la souris ou les flèches du clavier puis Entrée.</p>
 <h3>Occitan ou français</h3><p>Le bouton « Occitan / Français » change la langue des noms sur la carte, du titre et des listes.</p>
 <h3>Les couleurs de la carte</h3><p>Chaque commune est coloriée selon son pays : Périgord vert, blanc, pourpre ou noir.</p>
-<h3>Une commune au hasard</h3><p>Le bouton avec un dé, à droite, ouvre une commune au hasard : pratique pour découvrir des noms.</p>
 <h3>La liste et la prononciation</h3><p>L’onglet « Liste » donne toutes les communes par ordre alphabétique. L’onglet « Prononciation » explique comment se lisent les signes entre crochets, par exemple [rɒ'ʐa].</p>
 <h3>Télécharger la carte</h3><p>Le bouton avec une flèche vers le bas, à droite, ou le lien « Télécharger la carte (PDF) » en bas, donnent toute la carte au format PDF : les 558 communes avec leur nom occitan et leur nom français, coloriées par pays. Elle est prévue pour une affiche A0 (84 × 119 cm) et reste nette quand on zoome ; elle s’imprime aussi en A1 ou A2.</p>
 <h3>Zoomer et se déplacer</h3><p>Molette de la souris ou boutons + et −, glisser pour se déplacer ; sur téléphone, pincer avec deux doigts. Le bouton aux quatre coins revient à toute la Dordogne.</p><h3>Fonds de carte</h3><p>Le bouton des couches (feuilles superposées) permet de choisir le fond : carte simple, plan IGN, satellite ou carte occitane d’OpenStreetMap. On y trouve aussi « Texte plus grand ».</p>
