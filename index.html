@@ -578,6 +578,60 @@ html,body{max-width:100%;overflow-x:hidden}
   .full .hero h2{font-size:26px;margin-top:6px}
   .full .hero .row{margin-top:12px}
 }
+/* téléphone : vignette réduite à un petit bandeau, la carte reste visible (Nicolas) */
+@media (max-width:860px){
+  #card,body.admin #card{max-height:36vh;max-height:36dvh;padding:6px 14px calc(10px + env(safe-area-inset-bottom))}
+  #card:has(.mtlist:not([hidden])){max-height:46vh;max-height:46dvh}
+  #card::before{margin-bottom:4px}
+  #card .kick{display:none}
+  #card .x{width:30px;height:30px;top:10px;right:10px}
+  #card h2{font-size:21px;margin:2px 0 0;padding-right:40px}
+  #card .sub{font-size:13px}
+  #card .rattach{font-size:11px;margin-top:4px;padding:2px 6px}
+  #card .bigplay{height:40px;margin-top:8px;font-size:14.5px}
+  #card .bigplay .ic{width:28px;height:28px}
+  #card .frplay{height:34px;margin-top:6px;font-size:13px}
+  #card .ipa.small{margin-top:6px;font-size:12px}
+  #card .row{margin-top:8px;gap:6px;flex-wrap:nowrap}
+  #card .row .ghost{height:34px;padding:0 8px;font-size:13px;flex:1 1 0;justify-content:center;min-width:0;white-space:nowrap}
+  #card .row .ghost.edit{flex:0 0 auto}
+  #card .mtbtn{height:34px;margin-top:8px;font-size:13px}
+  #card .soon{margin-top:8px;padding:8px 10px;font-size:12.5px}
+  #card .seeing{margin-top:8px}
+  /* bas de l'écran : seulement « Sources » et « Mentions légales » (le reste est dans les onglets) */
+  .foot .cr{font-size:0!important;padding:5px 9px}
+  .foot .cr .srcbtn,.foot .cr .infolinks button,.foot .cr .adminlink{font-size:11.5px!important}
+  .foot .cr.open [data-t=credits]{font-size:10.5px}
+  .foot .cr .infolinks a,#lnkUsage{display:none}
+  .foot .cr #lnkLegal{margin-left:12px}
+}
+/* page « Télécharger l'appli » (QR code + mode d'emploi) */
+.apphero{display:flex;gap:18px;align-items:center;margin:14px 0 18px}
+.apphero img{width:84px;height:84px;border-radius:20px;flex:none;box-shadow:0 6px 18px rgba(20,24,30,.22)}
+.apphero h2{margin:0 0 6px!important;font-size:25px!important;line-height:1.2}
+.apphero p{margin:0!important}
+.appgrid{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:16px 16px;align-items:stretch}
+.appgrid .qrbox{grid-row:1/3;display:flex;flex-direction:column;justify-content:center}
+.qrbox,.appcard{position:relative;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px 16px 16px}
+.qrbox{text-align:center}
+.qrbox img{width:200px;height:200px;display:block;margin:6px auto 0;image-rendering:pixelated}
+.qrbox small{display:block;font-size:12.5px;color:var(--muted);margin-top:8px}
+.qrbox b{display:block;font-size:14px;margin-top:4px;color:var(--plum-d)}
+.qrbox h3,.appcard h3{margin:0 0 8px!important;font-size:16px!important;color:var(--ink)!important}
+.qrstep{position:absolute;top:-12px;left:14px;width:26px;height:26px;border-radius:50%;background:var(--plum);color:#fff;font-weight:800;font-size:14px;display:grid;place-items:center}
+.appcard ol{margin:0;padding-left:20px}.appcard li{margin:7px 0;font-size:14.5px;line-height:1.45}
+.kbd{display:inline-block;border:1px solid var(--line);border-radius:5px;padding:0 5px;font-size:12px;background:var(--bg)}
+.mobok{margin-top:16px!important;padding:11px 14px;background:var(--plum-l);border-radius:12px;font-weight:600}
+#instBtn2{margin-top:12px;width:100%;justify-content:center}
+#instBtn2[hidden]{display:none!important}
+/* bouton « Avoir l'appli sur mon téléphone » : une action, pas un onglet */
+.appbtn{flex:none;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border:0;border-radius:20px;background:var(--lime);color:var(--slate);font-weight:800;font-size:13.5px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.appbtn:hover{background:#DDE272}
+.appbtn[aria-pressed=true]{background:#fff}
+@media (max-width:700px){.appgrid{grid-template-columns:1fr}.appgrid .qrbox{grid-row:auto}}
+@media (max-width:860px){.qrbox{display:none}.appgrid{grid-template-columns:1fr}#vMob{display:none}.apphero img{width:64px;height:64px}.apphero h2{font-size:21px!important}}
+/* étiquette « modifié » : seulement pour l'Administration, jamais pour le public */
+body:not(.admin) .modif{display:none!important}
 /* dé « commune au hasard » retiré (Nicolas, 25/11/2026) */
 #rndBtn,.hbonus{display:none!important}
 </style>
@@ -605,6 +659,7 @@ html,body{max-width:100%;overflow-x:hidden}
     <button id="vList" aria-pressed="false" data-t="onglet_liste" data-tg="En-tête et onglets" data-tl="Onglet « Liste »">Liste</button>
     <button id="vPron" aria-pressed="false" data-t="onglet_pron" data-tg="En-tête et onglets" data-tl="Onglet « Prononciation »">Prononciation</button>
   </div>
+  <button id="vMob" class="appbtn" type="button" aria-pressed="false" title="Installer la carte sur votre téléphone, comme une application"><span aria-hidden="true">📲</span> Installer l’application mobile</button>
 </header>
 <div class="adminbar" role="status"><span><span class="long" id="admInfo">Administration · les changements sont enregistrés dans le fichier modifications.json</span><span class="short">Administration (démo)</span></span><button id="admTx">✎ Textes de la page</button><button id="admReset">Effacer mes modifications</button><button id="admOff">Quitter</button></div>
 
@@ -628,7 +683,25 @@ html,body{max-width:100%;overflow-x:hidden}
 <h3>Zoomer et se déplacer</h3><p>Molette de la souris ou boutons + et −, glisser pour se déplacer ; sur téléphone, pincer avec deux doigts. Le bouton aux quatre coins revient à toute la Dordogne.</p><h3>Fonds de carte</h3><p>Le bouton des couches (feuilles superposées) permet de choisir le fond : carte simple, plan IGN, satellite ou carte occitane d’OpenStreetMap. On y trouve aussi « Texte plus grand ».</p>
 <h3>Lieux-dits et rues en occitan</h3><p>Dans la vignette d’une commune, « Voir la liste des noms de lieux » affiche ses lieux-dits, hameaux et rues qui ont un nom occitan. Passer sur un nom de la liste le montre sur la carte.</p>
 <h3>Me localiser</h3><p>Le bouton « Me localiser », dans la case de recherche, montre où vous êtes et ouvre votre commune (le navigateur vous demande d’abord l’autorisation ; votre position n’est envoyée nulle part).</p></div>
-    <div id="infoLegal"><h2>Mentions légales et cookies</h2><h3>Éditeur du site</h3><p>Novelum – IEO Perigòrd (Institut d’Estudis Occitans, section du Périgord), association loi 1901. Adresse : [à compléter]. Directeur ou directrice de la publication : [à compléter]. Contact : [à compléter].</p>
+    <div id="infoMobile" hidden>
+<div class="apphero"><img src="img/icone-192.png" alt="" width="84" height="84">
+  <div><h2>Installez l’application sur votre téléphone</h2>
+  <p>Les noms occitans de Dordogne toujours dans votre poche : écoutez-les en balade, au marché ou en classe. <b>Gratuite, sans inscription, pour iPhone et Android.</b></p></div></div>
+<div class="appgrid">
+  <div class="qrbox"><span class="qrstep">1</span><h3>Scannez ce QR code</h3><img src="img/qr-carte.png" alt="QR code vers la carte des noms occitans" width="200" height="200"><small>avec l’appareil photo de votre téléphone</small><b>carte.novelum-ieo24.fr</b></div>
+  <div class="appcard"><span class="qrstep">2</span><h3><span aria-hidden="true"></span> Sur iPhone</h3>
+    <ol><li>Touchez <b>Partager</b> <span class="kbd" aria-hidden="true">⬆︎</span> en bas de Safari.</li>
+        <li>Choisissez <b>« Sur l’écran d’accueil »</b>.</li>
+        <li>Touchez <b>« Ajouter »</b>.</li></ol></div>
+  <div class="appcard"><span class="qrstep">2</span><h3><span aria-hidden="true">🤖</span> Sur Android</h3>
+    <ol><li>Touchez <b>« Installer l’appli »</b> dans la fenêtre de bienvenue,</li>
+        <li>ou le menu <b>⋮</b> de Chrome › <b>« Installer l’application »</b>.</li>
+        <li>Confirmez avec <b>« Installer »</b>.</li></ol></div>
+</div>
+<p class="mobok">✓ L’icône des quatre Périgord apparaît sur votre écran d’accueil. L’application se met à jour toute seule.</p>
+<button class="play hgo" id="instBtn2" type="button" hidden>📲 Installer l’application maintenant</button>
+</div>
+    <div id="infoLegal"><h2>Mentions légales</h2><h3>Éditeur du site</h3><p>Novelum – IEO Perigòrd (Institut d’Estudis Occitans, section du Périgord), association loi 1901. Adresse : [à compléter]. Directeur ou directrice de la publication : [à compléter]. Contact : [à compléter].</p>
 <h3>Partenaire</h3><p>Réalisé en partenariat avec le Département de la Dordogne.</p>
 <h3>Hébergement</h3><p>[Nom, adresse et téléphone de l’hébergeur : à compléter lors de la mise en ligne.]</p>
 <h3>Contenus et droits</h3><p>Noms occitans des communes, prononciations notées, formes anciennes et explications : Jean Roux, <i>Dictionnaire toponymique des communes de Dordogne</i>, édition préparée par Jean-Louis Lévêque et Etienne Roux, © Novelum – IEO Perigòrd et Lo Congrès permanent de la lenga occitana, 2020. Toute reproduction demande leur accord.</p>
@@ -714,7 +787,7 @@ html,body{max-width:100%;overflow-x:hidden}
     
     <div class="partner"><span><span data-t="part1" data-tg="Bas de page" data-tl="Partenariat, 1re ligne">Novelum – IEO Perigòrd</span><br><span data-t="part2" data-tg="Bas de page" data-tl="Partenariat, 2e ligne">en partenariat avec le Département de la Dordogne</span></span><img src="img/novelum.png" alt="Novelum – IEO Perigòrd" width="44" height="44" style="height:44px"><a class="dep-link" href="https://www.dordogne.fr" target="_blank" rel="noopener" title="dordogne.fr"><img src="img/dordonha.png" alt="Dordonha Perigòrd, lo Departament : site du Département (nouvelle fenêtre)" width="220" height="94"></a></div>
   </div>
-  <div class="cr"><button class="srcbtn" id="srcBtn" type="button" aria-expanded="false" aria-controls="credTxt">Sources</button><span id="credTxt" data-t="credits" data-tg="Bas de page" data-tl="Sources et crédits (en bas à droite)">Fonds : IGN Géoplateforme · Lieux-dits et rues en occitan © OpenStreetMap (ODbL) · Noms des communes : J. Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020</span> · <span class="infolinks"><a href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener">Télécharger la carte (PDF)</a> · <button id="lnkUsage">Comment utiliser la carte</button> · <button id="lnkLegal">Mentions légales et cookies</button></span> · <button class="adminlink" id="admOn" hidden style="display:none">Administration</button></div>
+  <div class="cr"><button class="srcbtn" id="srcBtn" type="button" aria-expanded="false" aria-controls="credTxt">Sources</button><span id="credTxt" data-t="credits" data-tg="Bas de page" data-tl="Sources et crédits (en bas à droite)">Fonds : IGN Géoplateforme · Lieux-dits et rues en occitan © OpenStreetMap (ODbL) · Noms des communes : J. Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020</span> · <span class="infolinks"><a href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener">Télécharger la carte (PDF)</a> · <button id="lnkUsage">Comment utiliser la carte</button> · <button id="lnkLegal">Mentions légales</button></span> · <button class="adminlink" id="admOn" hidden style="display:none">Administration</button></div>
 </div>
 
 <audio id="au" preload="none"></audio>
@@ -995,7 +1068,7 @@ function showCard(it){
   const zb=card.querySelector("[data-zoom]"); if(zb) zb.onclick=()=>choose(it,"fort",false);
   const sb=card.querySelector("[data-share]"); if(sb) sb.onclick=()=>shareIt(it);
   card.querySelector("[data-edit]").onclick=()=>openEdit(it);
-  const lb=card.querySelector("[data-list]"); if(lb) lb.onclick=()=>{listOpen=!listOpen; const l=card.querySelector(".mtlist"); l.hidden=!listOpen; lb.setAttribute("aria-expanded",listOpen); lb.textContent=listOpen?T("vig_masquer"):T("vig_liste",it.mt.h.length+it.mt.r.length+it.mt.o.length);
+  const lb=card.querySelector("[data-list]"); if(lb) lb.onclick=()=>{if(window.innerWidth<=860) setTimeout(()=>{if(sel===it&&it.layer) map.flyToBounds(it.layer.getBounds(),{paddingTopLeft:[20,14],paddingBottomRight:[20,card.offsetHeight+14],maxZoom:15,duration:0.5})},120); listOpen=!listOpen; const l=card.querySelector(".mtlist"); l.hidden=!listOpen; lb.setAttribute("aria-expanded",listOpen); lb.textContent=listOpen?T("vig_masquer"):T("vig_liste",it.mt.h.length+it.mt.r.length+it.mt.o.length);
     if(!listOpen){HI=PIN=null; microOff()} else microOn(); maskOn(listOpen?it:null); refresh()};
   card.querySelectorAll("[data-edmt]").forEach(b=>b.onclick=()=>openLD(MT[+b.dataset.edmt]));
   const ab=card.querySelector("[data-addmt]"); if(ab) ab.onclick=()=>startPlace(null,it);
@@ -1423,8 +1496,10 @@ function openHelp(){help.hidden=false; $("#hGo").focus()}
 $("#hGo").onclick=()=>{help.hidden=true; try{localStorage.setItem("noms.vu","1")}catch(e){}};
 help.addEventListener("click",e=>{if(e.target===help) $("#hGo").click()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!help.hidden) $("#hGo").click()});
-function openInfo(which){showMap(); document.body.classList.add("pageview"); closeCard(); const pg=$("#info"); pg.classList.add("on"); $("#infoUsage").hidden=which!=="usage"; $("#infoLegal").hidden=which!=="legal"; pg.scrollTop=0; $("#infoBack").focus()}
+function openInfo(which){showMap(); document.body.classList.add("pageview"); closeCard(); const pg=$("#info"); pg.classList.add("on"); $("#infoUsage").hidden=which!=="usage"; $("#infoLegal").hidden=which!=="legal"; $("#infoMobile").hidden=which!=="mobile"; $("#vMob").setAttribute("aria-pressed",which==="mobile"); if(which==="mobile") $("#vMap").setAttribute("aria-pressed","false"); pg.scrollTop=0; $("#infoBack").focus()}
 {const sb=$("#srcBtn"); sb.onclick=()=>{const o=sb.parentNode.classList.toggle("open"); sb.setAttribute("aria-expanded",o)}}
+$("#vMob").onclick=()=>openInfo("mobile");
+["#vMap","#vList","#vPron"].forEach(id=>$(id).addEventListener("click",()=>$("#vMob").setAttribute("aria-pressed","false")));
 $("#lnkUsage").onclick=()=>openInfo("usage"); $("#lnkLegal").onclick=()=>openInfo("legal");
 $("#hMore").onclick=()=>{$("#hGo").click(); openInfo("usage")};
 $("#infoBack").onclick=()=>showMap();
@@ -1476,7 +1551,8 @@ if(TOUCH){document.body.classList.add("touch");
  const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
  const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
  if(!standalone&&!EMBED&&location.protocol==="https:"){
-   window.addEventListener("beforeinstallprompt",e=>{e.preventDefault(); ask=e; ib.hidden=false});
+   window.addEventListener("beforeinstallprompt",e=>{e.preventDefault(); ask=e; ib.hidden=false; $("#instBtn2").hidden=false});
+   $("#instBtn2").onclick=()=>ib.click();
    if(ios) ib.hidden=false;
    ib.onclick=()=>{if(ask){ask.prompt(); ask.userChoice.finally(()=>{ask=null; ib.hidden=true})} else ih.hidden=!ih.hidden};
    window.addEventListener("appinstalled",()=>{ib.hidden=true; ih.hidden=true})}
