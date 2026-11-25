@@ -49,8 +49,8 @@
     auto.then(function(ok){ if(ok) return;
       var d=document.createElement("div"); d.id="verrou";
       d.innerHTML='<form autocomplete="off"><img src="img/icone-192.png" alt=""><h1>Noms occitans des communes de Dordogne</h1>'+
-        '<p>Cette carte n’est pas encore publique. Entrez le code d’accès qui vous a été donné.</p>'+
-        '<label for="vcode">Code d’accès</label><input id="vcode" type="password" autocomplete="current-password" required>'+
+        '<p>Cette carte n’est pas encore publique. Entrez le code d’accès.</p>'+
+        '<label for="vcode">Code d’accès</label><input id="vcode" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" required>'+
         '<button type="submit">Entrer</button><p class="err" role="alert"></p>'+
         '<a href="https://www.novelum-ieo24.fr/" target="_top">← Retour au site Novelum IEO Perigòrd</a></form>';
       document.body.appendChild(d);
