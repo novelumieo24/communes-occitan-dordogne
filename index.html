@@ -2,9 +2,72 @@
 <html lang="fr">
 <meta charset="utf-8">
 <title>Noms occitans des communes de Dordogne – carte à écouter</title>
+<style>
+#verrou{position:fixed;inset:0;z-index:99999;background:#252A32;display:grid;place-items:center;padding:20px;font-family:Montserrat,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+#verrou form{background:#fff;color:#252A32;border-radius:16px;max-width:400px;width:100%;padding:28px 26px 24px;border-top:6px solid #CBD05D;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+#verrou img{width:64px;height:64px;border-radius:12px;display:block;margin-bottom:12px}
+#verrou h1{margin:0 0 4px;font-size:21px;line-height:1.2}
+#verrou p{margin:0 0 16px;color:#5F676D;font-size:14.5px;line-height:1.45}
+#verrou label{display:block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#88446B;margin-bottom:6px}
+#verrou input{width:100%;box-sizing:border-box;height:48px;border:1.5px solid #E3E6E9;border-radius:10px;padding:0 14px;font-size:17px}
+#verrou input:focus{outline:none;border-color:#88446B;box-shadow:0 0 0 3px #F4EBF0}
+#verrou button{margin-top:14px;width:100%;height:48px;border:0;border-radius:10px;background:#88446B;color:#fff;font-size:16px;font-weight:700;cursor:pointer}
+#verrou button:disabled{opacity:.6}
+#verrou .err{color:#A3302A;font-weight:700;margin:10px 0 0;min-height:1.2em;font-size:14px}
+#verrou a{color:#88446B;font-size:13px;font-weight:700}
+</style>
+<script>
+/* Carte pas encore publique : les données sont chiffrées ; ce code les déchiffre après saisie du code d'accès. */
+(function(){
+  var PROT=/(^|\/)(data\.json|cle\.json|modifications\.json|sons\/[^\/?#]+\.json)$/;
+  var KEY=null, ready, unlocked=new Promise(function(r){ready=r});
+  var of=window.fetch.bind(window);
+  var b64=function(s){return Uint8Array.from(atob(s),function(c){return c.charCodeAt(0)})};
+  function dec(buf){var b=new Uint8Array(buf); return crypto.subtle.decrypt({name:"AES-CBC",iv:b.slice(0,16)},KEY,b.slice(16))}
+  window.fetch=function(input,init){
+    var url=typeof input==="string"?input:input.url, u=new URL(url,location.href);
+    if(u.origin===location.origin&&PROT.test(u.pathname)){
+      return unlocked.then(function(){return of(input,init)}).then(function(r){
+        if(!r.ok) return r;
+        return r.arrayBuffer().then(dec).then(function(pt){return new Response(pt,{status:200,headers:{"Content-Type":"application/json"}})})});
+    }
+    return of(input,init);
+  };
+  var ACC=of("acces.json",{cache:"no-cache"}).then(function(r){return r.json()});
+  function essai(raw){return crypto.subtle.importKey("raw",raw,{name:"AES-CBC"},true,["decrypt"]).then(function(k){KEY=k; return ACC})
+    .then(function(A){return dec(b64(A.verif).buffer)}).then(function(pt){if(new TextDecoder().decode(pt)!=="noms-ok") throw 0; return true})
+    .catch(function(){KEY=null; return false})}
+  function depuisCode(code){return ACC.then(function(A){
+    return crypto.subtle.importKey("raw",new TextEncoder().encode(code),"PBKDF2",false,["deriveBits"]).then(function(base){
+      return crypto.subtle.deriveBits({name:"PBKDF2",salt:b64(A.salt),iterations:A.iter,hash:"SHA-256"},base,256)})})}
+  function ouvrir(raw){try{localStorage.setItem("noms.acces",btoa(String.fromCharCode.apply(null,new Uint8Array(raw))))}catch(e){}
+    var v=document.getElementById("verrou"); if(v) v.remove(); ready()}
+  // code déjà donné sur cet appareil ?
+  var deja=null; try{deja=localStorage.getItem("noms.acces")}catch(e){}
+  var auto=deja?essai(b64(deja)).then(function(ok){if(ok){ouvrir(b64(deja).buffer); return true} try{localStorage.removeItem("noms.acces")}catch(e){} return false}):Promise.resolve(false);
+  document.addEventListener("DOMContentLoaded",function(){
+    auto.then(function(ok){ if(ok) return;
+      var d=document.createElement("div"); d.id="verrou";
+      d.innerHTML='<form autocomplete="off"><img src="img/icone-192.png" alt=""><h1>Noms occitans des communes de Dordogne</h1>'+
+        '<p>Cette carte n’est pas encore publique. Entrez le code d’accès qui vous a été donné.</p>'+
+        '<label for="vcode">Code d’accès</label><input id="vcode" type="password" autocomplete="current-password" required>'+
+        '<button type="submit">Entrer</button><p class="err" role="alert"></p>'+
+        '<a href="https://www.novelum-ieo24.fr/" target="_top">← Retour au site Novelum IEO Perigòrd</a></form>';
+      document.body.appendChild(d);
+      var f=d.querySelector("form"), i=d.querySelector("input"), b=d.querySelector("button"), e=d.querySelector(".err");
+      setTimeout(function(){i.focus()},50);
+      f.onsubmit=function(ev){ev.preventDefault(); b.disabled=true; e.textContent=""; b.textContent="Vérification…";
+        depuisCode(i.value).then(function(raw){return essai(new Uint8Array(raw)).then(function(ok){
+          if(ok) ouvrir(raw); else {e.textContent="Code incorrect."; b.disabled=false; b.textContent="Entrer"; i.select()}})})
+        .catch(function(){e.textContent="Impossible de vérifier le code. Réessayez."; b.disabled=false; b.textContent="Entrer"})};
+    });
+  });
+})();
+</script>
+
 <meta name="description" content="Carte interactive des noms occitans des 557 communes de Dordogne : écoutez la prononciation, lisez l&#x27;histoire de chaque nom et retrouvez les lieux-dits en occitan. Novelum – IEO Perigòrd, en partenariat avec le Département de la Dordogne.">
 <link rel="canonical" href="https://carte.novelum-ieo24.fr/">
-<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="robots" content="noindex,nofollow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Novelum – IEO Perigòrd">
 <meta property="og:title" content="Noms occitans des communes de Dordogne – carte à écouter">
@@ -522,7 +585,7 @@ html,body{overscroll-behavior:none}
 <div class="adminbar" role="status"><span><span class="long" id="admInfo">Administration · les changements sont enregistrés dans le fichier modifications.json</span><span class="short">Administration (démo)</span></span><button id="admTx">✎ Textes de la page</button><button id="admReset">Effacer mes modifications</button><button id="admOff">Quitter</button></div>
 
 <main>
-<noscript><p>Cette carte a besoin de JavaScript. <a href="communes.html">Voir la liste des noms occitans des communes de Dordogne</a>.</p></noscript>
+<noscript><p>Cette carte a besoin de JavaScript. </p></noscript>
   <div id="map" aria-label="Carte des communes de la Dordogne. Utilisez la recherche ou la vue Liste pour naviguer au clavier."></div>
   <section id="list" aria-labelledby="lt"><div class="wrap">
     <h2 id="lt" data-t="liste_titre" data-tg="Liste des communes" data-tl="Titre de la liste">Toutes les communes</h2>
@@ -627,7 +690,7 @@ html,body{overscroll-behavior:none}
     
     <div class="partner"><span><span data-t="part1" data-tg="Bas de page" data-tl="Partenariat, 1re ligne">Novelum – IEO Perigòrd</span><br><span data-t="part2" data-tg="Bas de page" data-tl="Partenariat, 2e ligne">en partenariat avec le Département de la Dordogne</span></span><img src="img/novelum.png" alt="Novelum – IEO Perigòrd" width="44" height="44" style="height:44px"><a class="dep-link" href="https://www.dordogne.fr" target="_blank" rel="noopener" title="dordogne.fr"><img src="img/dordonha.png" alt="Dordonha Perigòrd, lo Departament : site du Département (nouvelle fenêtre)" width="220" height="94"></a></div>
   </div>
-  <div class="cr"><button class="srcbtn" id="srcBtn" type="button" aria-expanded="false" aria-controls="credTxt">Sources</button><span id="credTxt" data-t="credits" data-tg="Bas de page" data-tl="Sources et crédits (en bas à droite)">Fonds : IGN Géoplateforme · Lieux-dits et rues en occitan © OpenStreetMap (ODbL) · Noms des communes : J. Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020</span> · <span class="infolinks"><a href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener">Télécharger la carte (PDF)</a> · <a href="communes.html">Liste des communes</a> · <button id="lnkUsage">Comment utiliser la carte</button> · <button id="lnkLegal">Mentions légales et cookies</button></span> · <button class="adminlink" id="admOn" hidden style="display:none">Administration</button></div>
+  <div class="cr"><button class="srcbtn" id="srcBtn" type="button" aria-expanded="false" aria-controls="credTxt">Sources</button><span id="credTxt" data-t="credits" data-tg="Bas de page" data-tl="Sources et crédits (en bas à droite)">Fonds : IGN Géoplateforme · Lieux-dits et rues en occitan © OpenStreetMap (ODbL) · Noms des communes : J. Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020</span> · <span class="infolinks"><a href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener">Télécharger la carte (PDF)</a> · <button id="lnkUsage">Comment utiliser la carte</button> · <button id="lnkLegal">Mentions légales et cookies</button></span> · <button class="adminlink" id="admOn" hidden style="display:none">Administration</button></div>
 </div>
 
 <audio id="au" preload="none"></audio>
