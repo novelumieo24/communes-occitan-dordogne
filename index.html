@@ -554,6 +554,30 @@ html,body{overscroll-behavior:none}
 .backsite:hover{background:rgba(255,255,255,.18);color:#fff}
 @media (max-width:860px){.backsite{font-size:12px;padding:3px 9px 3px 7px;margin-bottom:4px}}
 @media (max-width:420px){.backsite{font-size:11.5px}}
+/* ---------- Téléphone (Nicolas, iPhone 17 Pro Max) ---------- */
+html,body{max-width:100%;overflow-x:hidden}
+/* la fiche fermée ne dépasse plus de l'écran (sinon Safari laisse glisser à gauche/droite) */
+.full:not(.on){visibility:hidden;transition:transform .28s cubic-bezier(.2,.8,.2,1),visibility 0s .28s}
+.full.on{visibility:visible;transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+@media (max-width:860px){
+  /* textes de saisie à 16 px : l'iPhone ne zoome plus quand on touche la recherche */
+  .search input,.ed input,.ed textarea,#verrou input{font-size:16px!important}
+  /* vignette : petit panneau en bas, la carte reste visible au-dessus */
+  #card,body.admin #card{max-height:46vh;max-height:46dvh;padding:8px 16px calc(14px + env(safe-area-inset-bottom))}
+  #card::before{content:"";display:block;width:42px;height:5px;border-radius:3px;background:#D5D9DD;margin:0 auto 6px}
+  #card .x{top:12px}
+  #card h2{font-size:25px;margin-top:4px}
+  #card .bigplay{height:46px;margin-top:10px}
+  #card .row{margin-top:10px}
+  /* fiche complète : panneau qui monte du bas sur les 2/3 ; la commune reste visible en haut */
+  .full{top:auto;left:0;right:0;bottom:0;width:100%;height:calc((100vh - var(--hh,68px)) * .7);height:calc((100dvh - var(--hh,68px)) * .7);
+        border-radius:18px 18px 0 0;transform:translateY(102%);box-shadow:0 -14px 40px rgba(20,24,30,.28)}
+  .full.on{transform:none}
+  .full .hero{border-radius:18px 18px 0 0;padding:16px 18px 14px}
+  .full .hero::before{content:"";display:block;width:42px;height:5px;border-radius:3px;background:rgba(255,255,255,.35);margin:0 auto 10px}
+  .full .hero h2{font-size:26px;margin-top:6px}
+  .full .hero .row{margin-top:12px}
+}
 /* dé « commune au hasard » retiré (Nicolas, 25/11/2026) */
 #rndBtn,.hbonus{display:none!important}
 </style>
@@ -573,8 +597,8 @@ html,body{overscroll-behavior:none}
     <button class="fbtn" id="fBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="pays"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>Filtrer</span></button>
   </div>
   <div class="seg lang" role="group" aria-label="Langue des noms sur la carte">
-    <button id="lOc" aria-pressed="true" lang="oc"><span class="long" data-t="btn_oc" data-tg="En-tête et onglets" data-tl="Bouton de langue : occitan">Occitan</span><span class="short" aria-hidden="true">OC</span></button>
     <button id="lFr" aria-pressed="false"><span class="long" data-t="btn_fr" data-tg="En-tête et onglets" data-tl="Bouton de langue : français">Français</span><span class="short" aria-hidden="true">FR</span></button>
+    <button id="lOc" aria-pressed="true" lang="oc"><span class="long" data-t="btn_oc" data-tg="En-tête et onglets" data-tl="Bouton de langue : occitan">Occitan</span><span class="short" aria-hidden="true">OC</span></button>
   </div>
   <div class="seg" role="group" aria-label="Affichage">
     <button id="vMap" aria-pressed="true" data-t="onglet_carte" data-tg="En-tête et onglets" data-tl="Onglet « Carte »">Carte</button>
@@ -597,7 +621,7 @@ html,body{overscroll-behavior:none}
     <div id="infoUsage"><h2 id="it">Comment utiliser la carte</h2><h3>Écouter le nom d’une commune</h3><p>Cliquez sur une commune : sa vignette s’ouvre à droite et vous entendez son nom en occitan, enregistré par une personne du pays. Le gros bouton « Escotar · Écouter » le fait réentendre. Un clic ailleurs sur la carte, ou sur ✕, referme la vignette et ramène à toute la Dordogne.</p>
 <h3>Lire la fiche du nom</h3><p>« Fiche complète » ouvre l’histoire du nom tirée du <i>Dictionnaire toponymique des communes de Dordogne</i> : formes anciennes (comment le nom était écrit dans les vieux documents), hypothèses des auteurs et explication.</p>
 <h3>Chercher une commune</h3><p>Tapez le nom dans la case en haut, en français ou en occitan, avec ou sans accents : « peiregòrd », « sarlat », « brageirac »… Choisissez une proposition avec la souris ou les flèches du clavier puis Entrée.</p>
-<h3>Occitan ou français</h3><p>Le bouton « Occitan / Français » change la langue des noms sur la carte, du titre et des listes.</p>
+<h3>Français ou occitan</h3><p>Le bouton « Français / Occitan » change la langue des noms sur la carte, du titre et des listes.</p>
 <h3>Les couleurs de la carte</h3><p>Chaque commune est coloriée selon son pays : Périgord vert, blanc, pourpre ou noir.</p>
 <h3>La liste et la prononciation</h3><p>L’onglet « Liste » donne toutes les communes par ordre alphabétique. L’onglet « Prononciation » explique comment se lisent les signes entre crochets, par exemple [rɒ'ʐa].</p>
 <h3>Télécharger la carte</h3><p>Le bouton avec une flèche vers le bas, à droite, ou le lien « Télécharger la carte (PDF) » en bas, donnent toute la carte au format PDF : les 558 communes avec leur nom occitan et leur nom français, coloriées par pays. Elle est prévue pour une affiche A0 (84 × 119 cm) et reste nette quand on zoome ; elle s’imprime aussi en A1 ou A2.</p>
@@ -665,7 +689,7 @@ html,body{overscroll-behavior:none}
   <ol>
     <li><b>1</b><span><strong>Cliquez sur une commune</strong> : vous entendez son nom en occitan.</span></li>
     <li><b>2</b><span><strong>Cherchez votre village ou un lieu-dit</strong> en haut, en français ou en occitan.</span></li>
-    <li><b>3</b><span><strong>Occitan ou français</strong> : le bouton du haut change la langue de la carte.</span></li>
+    <li><b>3</b><span><strong>Français ou occitan</strong> : le bouton du haut change la langue de la carte.</span></li>
   </ol>
   <p class="hbonus">Envie de découvrir ? Le bouton <span class="hdice" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.3" fill="currentColor"/><circle cx="15" cy="15" r="1.3" fill="currentColor"/><circle cx="15" cy="9" r="1.3" fill="currentColor"/><circle cx="9" cy="15" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></svg></span> fait entendre une commune au hasard.</p>
   <button class="play hgo" id="hGo">C’est parti</button>
@@ -701,7 +725,7 @@ const $=s=>document.querySelector(s);
 const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[’']/g," ").replace(/-/g," ");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
-let sel=null, LANG=store.get("noms.lang")||"oc";
+let sel=null, LANG=store.get("noms.lang")||"fr";
 const card=$("#card"), full=$("#full");
 const EMBED=(()=>{try{return window.self!==window.top}catch(e){return true}})();
 if(EMBED){document.body.classList.add("embed"); if(document.fullscreenEnabled||document.webkitFullscreenEnabled) document.body.classList.add("fs-ok")}
@@ -1003,7 +1027,9 @@ document.addEventListener("pointerdown",e=>{if(!card.classList.contains("on")||f
 /* ---------- Fiche complète ---------- */
 let lastFocus=null;
 function splitForme(s){const m=s.match(/^(.*?),?\s+((?:v\.\s*|vers\s+|fin\s+|début\s+)?(?:\d{3,4}(?:-\d{2,4})?|[XVI]+e(?:\s*s\.)?))\s*(?:et\s+\d{4}\s*)?(?:\((.*)\))?\s*$/); return m?{f:m[1],d:m[2],s:m[3]||""}:{f:s,d:"",s:""}}
-function shiftForFull(it){if(!it.layer||window.innerWidth<=860) return; if(!window.__vb0) window.__vb0={c:map.getCenter(),z:map.getZoom(),id:it.p.id}; const fw=full.offsetWidth; map.panInside(it.layer.getBounds().getCenter(),{paddingTopLeft:[80,80],paddingBottomRight:[fw+80,80]})}
+function shiftForFull(it){if(!it.layer) return;
+  if(window.innerWidth<=860){if(!window.__vb0) window.__vb0={c:map.getCenter(),z:map.getZoom(),id:it.p.id};
+    const h=full.offsetHeight; map.flyToBounds(it.layer.getBounds(),{paddingTopLeft:[24,14],paddingBottomRight:[24,h+14],duration:0.5,maxZoom:15}); return} if(!window.__vb0) window.__vb0={c:map.getCenter(),z:map.getZoom(),id:it.p.id}; const fw=full.offsetWidth; map.panInside(it.layer.getBounds().getCenter(),{paddingTopLeft:[80,80],paddingBottomRight:[fw+80,80]})}
 function openFull(it,sync){
   const f=it.f; if(!sync) lastFocus=document.activeElement;
   const els=f.els.map(e=>`<div class="el">
@@ -1040,7 +1066,7 @@ document.addEventListener("pointerdown",()=>{},true);
 const fullOpen=()=>full.classList.contains("on")&&!full.querySelector("form");
 function restoreAfterFull(){const v=window.__vb0; window.__vb0=null; if(!v) return;
   if(sel&&sel.p.id===v.id) map.flyTo(v.c,v.z,{duration:0.5});
-  else if(sel&&sel.layer){const wide=window.innerWidth>860; map.flyToBounds(sel.layer.getBounds(),{paddingTopLeft:[30,30],paddingBottomRight:[wide?390:30,wide?30:280],duration:0.5,maxZoom:16})}}
+  else if(sel&&sel.layer){const wide=window.innerWidth>860; map.flyToBounds(sel.layer.getBounds(),{paddingTopLeft:[30,30],paddingBottomRight:[wide?390:30,wide?30:card.offsetHeight+20],duration:0.5,maxZoom:16})}}
 function closeFull(){full.classList.remove("on"); restoreAfterFull(); lastFocus&&lastFocus.focus&&lastFocus.focus()}
 new MutationObserver(()=>document.body.classList.toggle("full-open",full.classList.contains("on"))).observe(full,{attributes:true,attributeFilter:["class"]});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(full.classList.contains("on")) closeFull(); else if($("#layers").classList.contains("on")) toggleLayers(false); else closeCard()}});
