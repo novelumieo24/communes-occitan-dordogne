@@ -832,7 +832,7 @@ const comLayer=L.geoJSON(GJ,{style:styleOf,onEachFeature:(f,l)=>{
   l.on("mouseover",e=>{if(it!==sel) l.setStyle(plain()?{fillColor:PGH[it.p.pg]||"#B77E9E"}:{fillOpacity:0.18,weight:1.5,opacity:.9}); showTip(e.originalEvent,nameA(it),tipB(it)+hintOf(it)); if(it.snd.length) resolve(it.snd[0].f)});
   l.on("mousemove",e=>moveTip(e.originalEvent));
   l.on("mouseout",()=>{comLayer.resetStyle(l); hideTip()});
-  l.on("click",e=>{L.DomEvent.stopPropagation(e); if(PLACE){PLACE(e.latlng); return} unlockAudio(); choose(it,true,true)});
+  l.on("click",e=>{L.DomEvent.stopPropagation(e); if(PLACE){PLACE(e.latlng); return} unlockAudio(); if(it===sel) choose(it,"fort",false); else choose(it,false,true)});
 }}).addTo(map);
 // voile autour du département et contour
 // départements voisins (carte simple) et voile (autres fonds)
@@ -962,6 +962,15 @@ function soundBtns(it){const fr=it.raw&&it.raw.sonfr, oc=it.snd.length, frFirst=
   const b=(cls,src,l)=>`<button class="play ${cls}" data-src="${esc(src)}">${playHTML(l)}</button>`;
   if(frFirst) return b("bigplay",fr[0].f,"Écouter en français")+(oc?b("frplay",it.snd[0].f,"Écouter en occitan"):"");
   return (oc?b("bigplay",it.snd[0].f,esc(T("vig_ecouter"))):"")+(fr?b("frplay",fr[0].f,"Écouter en français"):"")}
+const SHARE_ICO='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>';
+/* partager une commune : lien direct vers sa fiche sur la carte */
+function shareIt(it){const url=location.origin+location.pathname+"#"+it.p.id, oc=it.f?it.f.oc:"";
+  const titre=oc?it.p.fr+" en occitan : "+oc:it.p.fr+" sur la carte des noms occitans";
+  const de=n=>/^Le /.test(n)?"du "+n.slice(3):/^Les /.test(n)?"des "+n.slice(4):/^[AEIOUYÉÈÊHaeiouyéèêh]/.test(n)?"d’"+n:"de "+n;
+  const texte=oc?"Écoute le nom occitan "+de(it.p.fr)+" : "+oc+" 🔊":"Carte des noms occitans des communes de Dordogne";
+  if(navigator.share){navigator.share({title:titre,text:texte,url}).catch(()=>{}); return}
+  const ok=()=>toast("Lien copié : collez-le dans un message ou un e-mail.");
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(ok,()=>prompt("Copiez ce lien :",url)); else prompt("Copiez ce lien :",url)}
 function showCard(it){
   const f=it.f, n=nPlaces(it);
   card.innerHTML=`<button class="x" aria-label="Fermer">✕</button>
@@ -972,6 +981,8 @@ function showCard(it){
    ${f&&ipa(f)?`<p class="ipa small">${esc(T("vig_pron"))} <b>${esc(ipa(f))}</b><button class="howread" data-howread>Comment lire ?</button></p>`:""}
    <div class="row">
    ${f?`<button class="ghost" data-more>${esc(T("vig_fiche"))}</button>`:""}
+   <button class="ghost" data-zoom title="Zoomer sur la commune">🔍 Zoomer</button>
+   <button class="ghost" data-share title="Partager cette commune">${SHARE_ICO} Partager</button>
    <button class="ghost edit" data-edit>✎ Modifier</button></div>
    ${seeingHTML(it)}
    ${f&&f.verif?`<div class="soon">${esc(f.verif)}</div>`:""}
@@ -981,6 +992,8 @@ function showCard(it){
   const pb=card.querySelector(".bigplay"); card.querySelectorAll("#card [data-src]").forEach(b=>b.onclick=()=>playBtn(b,b.dataset.src));
   const hr=card.querySelector("[data-howread]"); if(hr) hr.onclick=()=>$("#vPron").click();
   const mb=card.querySelector("[data-more]"); if(mb) mb.onclick=()=>openFull(it);
+  const zb=card.querySelector("[data-zoom]"); if(zb) zb.onclick=()=>choose(it,"fort",false);
+  const sb=card.querySelector("[data-share]"); if(sb) sb.onclick=()=>shareIt(it);
   card.querySelector("[data-edit]").onclick=()=>openEdit(it);
   const lb=card.querySelector("[data-list]"); if(lb) lb.onclick=()=>{listOpen=!listOpen; const l=card.querySelector(".mtlist"); l.hidden=!listOpen; lb.setAttribute("aria-expanded",listOpen); lb.textContent=listOpen?T("vig_masquer"):T("vig_liste",it.mt.h.length+it.mt.r.length+it.mt.o.length);
     if(!listOpen){HI=PIN=null; microOff()} else microOn(); maskOn(listOpen?it:null); refresh()};
@@ -1009,7 +1022,7 @@ function choose(it,zoom=true,autoplay=false){
   relabelOne(it); hideTip(); maskOn(listOpen?it:null);
   const pb=showCard(it);
   {const wide=window.innerWidth>860, gl=gameOpen()&&wide?370:30, pr=wide?(full.classList.contains("on")?full.offsetWidth+40:390):30, pb=wide?30:Math.min(window.innerHeight*0.58,card.offsetHeight)+20;
-   if(zoom&&it.layer) map.flyToBounds(it.layer.getBounds(),{paddingTopLeft:[gl,30],paddingBottomRight:[pr,pb],duration:0.8,maxZoom:16});
+   if(zoom&&it.layer) map.flyToBounds(it.layer.getBounds(),{paddingTopLeft:[gl,30],paddingBottomRight:[pr,pb],duration:0.8,maxZoom:zoom==="fort"?15:12});
    else if(it.layer) map.panInside(it.layer.getBounds().getCenter(),{paddingTopLeft:[gl+40,60],paddingBottomRight:[pr+40,pb+40]})}
   refresh();
   if(autoplay&&pb) playSrc(pb.dataset.src,pb); else stopAudio();
