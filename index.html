@@ -681,12 +681,38 @@ body.full-open .demo{display:none!important}
 .soutlivre:hover{border-color:var(--plum)}
 .soutdon{margin:14px 0 0;font-size:14px;line-height:1.5;color:#4B3A44}
 .soutbtn{display:flex!important;align-items:center;justify-content:center;gap:8px;text-decoration:none;margin-top:10px!important}
+/* titre et logo cliquables : pas de cadre bleu au clic (le contour reste pour le clavier) */
+.brand .mini,.brand h1{-webkit-tap-highlight-color:transparent}
+.brand .mini:focus:not(:focus-visible),.brand h1:focus:not(:focus-visible){outline:none}
+/* haut de page sur 2 lignes (ordinateur et tablette) */
+@media (min-width:861px){
+  header{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-areas:"brand brand app lang" "nav search search search";gap:12px 16px!important;align-items:center;padding:14px 22px!important}
+  header .brand{grid-area:brand;flex:none!important;min-width:0}
+  header .navcol{display:contents}
+  header .navcol .seg{grid-area:nav}
+  header .appbtn{grid-area:app;justify-self:end}
+  header .seg.lang{grid-area:lang}
+  header .search{grid-area:search;max-width:none!important;margin:0!important;min-width:0!important;order:0!important;flex:none!important}
+}
 /* écrans tactiles : zones à toucher plus grandes (sans changer l'apparence) */
 body.touch .backsite{padding:7px 12px 7px 9px}
 body.touch .seg button{min-height:38px}
 body.touch #card .x,body.touch .full .x,body.touch .askx{width:40px;height:40px}
 body.touch .howread,body.touch .asklink,body.touch .more{padding-top:8px;padding-bottom:8px}
-body.touch .foot .cr .srcbtn,body.touch .foot .cr .infolinks button,body.touch .foot .cr .infolinks a{display:inline-block;padding:7px 3px}
+body.touch .foot .cr .srcbtn,body.touch .foot .cr .infolinks button,body.touch .foot .cr .infolinks a{display:inline-block;padding:4px 2px}
+/* téléphone : onglets et FR/OC sur la même ligne, recherche sur toute la largeur */
+@media (max-width:860px){
+  header .navcol{order:2!important;flex:1 1 auto}
+  header .seg.lang{order:3!important;margin-left:auto}
+  header .search{order:4!important;flex:1 1 100%!important}
+}
+/* téléphone : bas de page discret */
+@media (max-width:860px){
+  .foot{bottom:10px!important}
+  .foot .cr{padding:2px 8px!important;font-size:0!important;background:rgba(255,255,255,.75)}
+  .foot .cr .srcbtn,.foot .cr .infolinks button{font-size:10.5px!important}
+  .partner{padding:3px 6px!important;gap:6px!important}.partner img{height:24px!important;width:auto!important}
+}
 /* commune sans enregistrement : on le dit */
 .nosound{margin:10px 0 0;padding:9px 12px;border-radius:10px;background:var(--bg);color:var(--muted);font-size:13.5px;font-weight:600}
 /* livre (avec sa couverture) et don bien visible */
@@ -729,7 +755,7 @@ body.touch .foot .cr .srcbtn,body.touch .foot .cr .infolinks button,body.touch .
   <div class="search" role="search">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     <label class="sr" for="q">Chercher une commune ou un lieu-dit, en français ou en occitan</label>
-    <input id="q" type="search" autocomplete="off" placeholder="Commune ou lieu-dit (Sarlat, Brageirac…)" data-tp="recherche" data-tg="En-tête et onglets" data-tl="Texte gris de la case de recherche" role="combobox" aria-expanded="false" aria-controls="res" aria-autocomplete="list">
+    <input id="q" type="search" autocomplete="off" placeholder="Commune, lieu-dit ou rue…" data-tp="recherche" data-tg="En-tête et onglets" data-tl="Texte gris de la case de recherche" role="combobox" aria-expanded="false" aria-controls="res" aria-autocomplete="list">
     <ul id="res" class="results" role="listbox" aria-label="Résultats"></ul>
     <button class="locbtn" id="locBtn" type="button" title="Afficher ma position et ma commune"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span data-t="btn_loc" data-tg="En-tête et onglets" data-tl="Bouton « Me localiser » (recherche)">Me localiser</span></button>
     <button class="fbtn" id="fBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="pays"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>Filtrer</span></button>
@@ -1220,7 +1246,7 @@ function showCard(it){
    ${seeingHTML(it)}
    ${f&&f.verif?`<div class="soon">${esc(f.verif)}</div>`:""}
    ${f?"":`<div class="soon">${esc(T("vig_soon"))}</div>`}`;
-  card.classList.add("on"); document.body.classList.add("card-open");
+  card.scrollTop=0; card.classList.add("on"); document.body.classList.add("card-open");
   card.querySelector(".x").onclick=closeCard;
   const pb=card.querySelector(".bigplay"); card.querySelectorAll("#card [data-src]").forEach(b=>b.onclick=()=>playBtn(b,b.dataset.src));
   const hr=card.querySelector("[data-howread]"); if(hr) hr.onclick=()=>$("#vPron").click();
@@ -1243,7 +1269,7 @@ const isAdmin=()=>document.body.classList.contains("admin");
 const ldMod=o=>o.added?"ajouté":LD.ed[o.id]?"modifié":"";
 function seeingHTML(it){const m=it.mt, tot=m.h.length+m.r.length+m.o.length, adm=isAdmin();
   const addBtn=adm?`<button class="ghost listbtn edit" data-addmt>+ Ajouter un lieu-dit ou une rue</button>`:"";
-  if(!tot) return `<div class="seeing"><p class="none">${esc(T("vig_vide"))}</p>${addBtn}</div>`;
+  if(!tot) return addBtn?`<div class="seeing">${addBtn}</div>`:"";
   const nm=o=>LANG==="oc"?o.oc:o.fr, ot=o=>LANG==="oc"?o.fr:o.oc;
   const grp=(k,l)=>m[k].length?`<h5>${l} · ${m[k].length}</h5><ul>${m[k].slice().sort((a,b)=>nm(a).localeCompare(nm(b),"fr")).map(o=>`<li${adm?' class="adm"':""}><button data-mt="${MT.indexOf(o)}"><b class="${lgA()}">${esc(nm(o))}${ldMod(o)?`<em class="modif">${ldMod(o)}</em>`:""}</b>${ot(o)&&ot(o)!==nm(o)?`<span class="${lgB()}">${esc(ot(o))}</span>`:""}</button>${adm?`<button class="edmt" data-edmt="${MT.indexOf(o)}" aria-label="Modifier ${esc(nm(o))}">✎</button>`:""}</li>`).join("")}</ul>`:"";
   const dels=adm&&it.mtDel.length?`<h5>Supprimés · ${it.mtDel.length}</h5><ul>${it.mtDel.map(o=>`<li class="adm deleted"><button data-edmt="${MT.indexOf(o)}"><b>${esc(nm(o))}</b><span>rétablir…</span></button></li>`).join("")}</ul>`:"";

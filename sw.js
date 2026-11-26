@@ -1,5 +1,5 @@
 // Noms occitans des communes de Dordogne : fonctionnement hors connexion
-const V="noms-20261126141746";
+const V="noms-20261126143852";
 const BASE=["./","index.html","data.json","communes.geojson","dep.json","cle.json","manifest.json","img/icone-192.png","img/favicon-32.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(BASE)).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(n=>n!==V).map(n=>caches.delete(n)))).then(()=>self.clients.claim()))});
