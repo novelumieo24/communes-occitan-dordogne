@@ -86,15 +86,16 @@
 <link rel="icon" type="image/png" sizes="192x192" href="img/icone-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Map", "name": "Noms occitans des communes de Dordogne", "alternateName": "Noms occitans de las comunas de Dordonha", "url": "https://carte.novelum-ieo24.fr/", "description": "Carte interactive des noms occitans des 557 communes de Dordogne : écoutez la prononciation, lisez l'histoire de chaque nom et retrouvez les lieux-dits en occitan. Novelum – IEO Perigòrd, en partenariat avec le Département de la Dordogne.", "inLanguage": ["fr", "oc"], "image": "https://carte.novelum-ieo24.fr/img/partage.png", "mapType": "https://schema.org/VenueMap", "about": {"@type": "AdministrativeArea", "name": "Dordogne", "alternateName": "Dordonha"}, "spatialCoverage": {"@type": "Place", "name": "Dordogne, France"}, "publisher": {"@type": "Organization", "name": "Novelum – IEO Perigòrd", "url": "https://www.novelum-ieo24.fr"}, "contributor": {"@type": "GovernmentOrganization", "name": "Département de la Dordogne", "url": "https://www.dordogne.fr"}, "citation": "Jean Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020", "isAccessibleForFree": true}</script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://data.geopf.fr https://tile.openstreetmap.bzh https://*.goatcounter.com; font-src 'self'; media-src 'self' data:; connect-src 'self' https://data.geopf.fr https://api.web3forms.com https://*.goatcounter.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.min.css">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#252A32">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Noms occitans">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/montserrat.css">
 <style>
 :root{color-scheme:light;
   --slate:#252A32; --slate2:#353B45; --plum:#88446B; --plum-d:#6A3253; --plum-l:#F4EBF0; --lime:#CBD05D; --lime-d:#7C8125;
@@ -896,7 +897,7 @@ body.full-open .demo{display:none!important}
 </div>
 
 <audio id="au" preload="none"></audio>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="vendor/leaflet/leaflet.min.js"></script>
 <script>
 Promise.all([fetch("data.json",{cache:"no-cache"}).then(r=>r.json()),fetch("communes.geojson",{cache:"no-cache"}).then(r=>r.json()),fetch("dep.json",{cache:"no-cache"}).then(r=>r.json()),fetch("modifications.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null)]).then(function([D,GJ,DEP,MODS]){
 const $=s=>document.querySelector(s);
