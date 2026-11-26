@@ -655,6 +655,9 @@ body:not(.admin) .modif{display:none!important}
 /* les résultats de recherche passent toujours au-dessus des boutons de la carte */
 .results{z-index:70}
 body:has(.results.on) header{z-index:60}
+/* « Partager l'appli » */
+.hlink.shareapp{margin-top:8px;font-weight:600;color:var(--muted)}
+.shareapp2{margin-top:12px}
 /* dé « commune au hasard » retiré (Nicolas, 25/11/2026) */
 #rndBtn,.hbonus{display:none!important}
 </style>
@@ -724,6 +727,7 @@ body:has(.results.on) header{z-index:60}
         <li>Confirmez avec <b>« Installer »</b>.</li></ol></div>
 </div>
 <p class="mobok">✓ L’icône des quatre Périgord apparaît sur votre écran d’accueil. L’application se met à jour toute seule.</p>
+<button class="ghost shareapp2" type="button" data-shareapp>${SHARE_ICO_TXT} Partager l’appli avec vos proches</button>
 <button class="play hgo" id="instBtn2" type="button" hidden><svg class="appico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg> Installer l’application maintenant</button>
 </div>
     <div id="infoLegal"><h2>Mentions légales</h2><h3>Éditeur du site</h3><p>Novelum – IEO Perigòrd (Institut d’Estudis Occitans, section du Périgord), association loi 1901. Adresse : [à compléter]. Directeur ou directrice de la publication : [à compléter]. Contact : [à compléter].</p>
@@ -807,6 +811,7 @@ body:has(.results.on) header{z-index:60}
   <p class="hbonus">Envie de découvrir ? Le bouton <span class="hdice" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.3" fill="currentColor"/><circle cx="15" cy="15" r="1.3" fill="currentColor"/><circle cx="15" cy="9" r="1.3" fill="currentColor"/><circle cx="9" cy="15" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></svg></span> fait entendre une commune au hasard.</p>
   <button class="play hgo" id="hGo">C’est parti</button>
   <button class="hlink" id="hMore">Tout savoir sur la carte</button>
+  <button class="hlink shareapp" type="button" data-shareapp>Partager l’appli avec vos proches</button>
   <button class="ghost instbtn" id="instBtn" type="button" hidden><svg class="appico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg> Installer l’application sur mon téléphone</button>
   <div class="insthelp" id="instHelp" hidden><b>Sur iPhone ou iPad :</b> touchez <span aria-hidden="true">⎙</span> <b>Partager</b> en bas de Safari, puis <b>« Sur l’écran d’accueil »</b>. La carte s’ouvrira comme une appli.</div>
 </div></div>
@@ -1023,7 +1028,7 @@ function refresh(){
     if(HI&&HI.com===sel){hiMk.setLatLng([HI.lat,HI.lon]); hiMk.addTo(map); const el=hiMk.getElement(); if(el) el.querySelector("span").textContent=LANG==="oc"?HI.oc:HI.fr} else if(map.hasLayer(hiMk)) map.removeLayer(hiMk);
     return}
   if(map.hasLayer(hiMk)) map.removeLayer(hiMk);
-  const fits=(ll,txt,fs,pad)=>{const p=map.latLngToContainerPoint(ll); const w=txt.length*fs*0.58+(pad||6), h=fs+4;
+  const fits=(ll,txt,fs,pad)=>{const p=map.latLngToContainerPoint(ll); const w=txt.length*fs*0.64+(pad||6)+12, h=fs+10; /* un peu d'air entre deux noms (Nicolas) */
     const r={x1:p.x-w/2,x2:p.x+w/2,y1:p.y-h/2,y2:p.y+h/2};
     if(placed.some(q=>r.x1<q.x2&&r.x2>q.x1&&r.y1<q.y2&&r.y2>q.y1)) return false; placed.push(r); return true};
   const show=(mk,on,grp)=>{if(on&&!grp.hasLayer(mk)) mk.addTo(grp); else if(!on&&grp.hasLayer(mk)) grp.removeLayer(mk)};
@@ -1077,13 +1082,17 @@ function soundBtns(it){const fr=it.raw&&it.raw.sonfr, oc=it.snd.length, frFirst=
   return (oc?b("bigplay",it.snd[0].f,esc(T("vig_ecouter"))):"")+(fr?b("frplay",fr[0].f,"Écouter en français"):"")}
 const SHARE_ICO='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>';
 /* partager une commune : lien direct vers sa fiche sur la carte */
-function shareIt(it){const url=location.origin+location.pathname+"#"+it.p.id, oc=it.f?it.f.oc:"";
-  const titre=oc?it.p.fr+" en occitan : "+oc:it.p.fr+" sur la carte des noms occitans";
-  const de=n=>/^Le /.test(n)?"du "+n.slice(3):/^Les /.test(n)?"des "+n.slice(4):/^[AEIOUYÉÈÊHaeiouyéèêh]/.test(n)?"d’"+n:"de "+n;
-  const texte=oc?"Écoute le nom occitan "+de(it.p.fr)+" : "+oc+" 🔊":"Carte des noms occitans des communes de Dordogne";
+function de_(n){return /^Le /.test(n)?"du "+n.slice(3):/^Les /.test(n)?"des "+n.slice(4):/^[AEIOUYÉÈÊHaeiouyéèêh]/.test(n)?"d’"+n:"de "+n}
+/* partager : message « A » (Nicolas) ; sur téléphone, la feuille de partage ; sinon le message et le lien sont copiés */
+function shareMsg(titre,texte,url){
   if(navigator.share){navigator.share({title:titre,text:texte,url}).catch(()=>{}); return}
-  const ok=()=>toast("Lien copié : collez-le dans un message ou un e-mail.");
-  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(ok,()=>prompt("Copiez ce lien :",url)); else prompt("Copiez ce lien :",url)}
+  const tout=texte+" "+url, ok=()=>toast("Message copié : collez-le dans un e-mail, un SMS ou sur les réseaux.");
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(tout).then(ok,()=>prompt("Copiez ce message :",tout)); else prompt("Copiez ce message :",tout)}
+function shareIt(it){const url=location.origin+location.pathname, /* le lien ouvre l'appli à l'accueil ; on se promène ensuite (Nicolas) */ oc=it.f?it.f.oc:"", q="D’où vient le nom "+de_(it.p.fr)+" ?";
+  shareMsg(q, oc?q+" 🤔 J’ai découvert son histoire et son nom occitan : "+oc+" 🔊 Découvrez l’origine du nom de votre commune 👉"
+                :q+" 🤔 Découvrez l’origine du nom de votre commune sur la carte des noms occitans de Dordogne 👉", url)}
+function shareApp(){shareMsg("Noms occitans des communes de Dordogne",
+  "D’où vient le nom de votre commune ? 🤔 Cette appli raconte l’origine du nom de chaque commune de Dordogne, avec son nom occitan à écouter 🔊 Cherchez la vôtre 👉", location.origin+location.pathname)}
 /* ---------- « Une question, une remarque ? » : e-mail direct à Novelum (Web3Forms) ---------- */
 const ASK_KEY="3f2bd908-2497-4a56-9507-c7215d606d73";
 let askFrom=null;
@@ -1565,6 +1574,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!help.hidden) $("#h
 function openInfo(which){showMap(); document.body.classList.add("pageview"); closeCard(); const pg=$("#info"); pg.classList.add("on"); $("#infoUsage").hidden=which!=="usage"; $("#infoLegal").hidden=which!=="legal"; $("#infoMobile").hidden=which!=="mobile"; $("#vMob").setAttribute("aria-pressed",which==="mobile"); if(which==="mobile") $("#vMap").setAttribute("aria-pressed","false"); pg.scrollTop=0; $("#infoBack").focus()}
 {const sb=$("#srcBtn"); sb.onclick=()=>{const o=sb.parentNode.classList.toggle("open"); sb.setAttribute("aria-expanded",o)}}
 $("#vMob").onclick=()=>openInfo("mobile");
+document.querySelectorAll("[data-shareapp]").forEach(b=>{b.innerHTML=b.innerHTML.replace("${SHARE_ICO_TXT}",SHARE_ICO); b.onclick=shareApp});
 ["#vMap","#vList","#vPron"].forEach(id=>$(id).addEventListener("click",()=>$("#vMob").setAttribute("aria-pressed","false")));
 $("#lnkUsage").onclick=()=>openInfo("usage"); $("#lnkLegal").onclick=()=>openInfo("legal");
 $("#hMore").onclick=()=>{$("#hGo").click(); openInfo("usage")};
@@ -1624,7 +1634,7 @@ if(TOUCH){document.body.classList.add("touch");
    window.addEventListener("appinstalled",()=>{ib.hidden=true; ih.hidden=true})}
  if("serviceWorker" in navigator&&location.protocol==="https:") navigator.serviceWorker.register("sw.js").catch(()=>{})}
 setBase(base); setLang(LANG);
-const h=location.hash.slice(1); if(h&&byId[h]) setTimeout(()=>choose(byId[h]),300);
-window.addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(h&&byId[h]&&byId[h]!==sel) choose(byId[h])});
+{const m=location.hash.slice(1).split("/"), h=m[0]; if(h&&byId[h]) setTimeout(()=>{choose(byId[h]); if(m[1]==="fiche"&&byId[h].f) setTimeout(()=>openFull(byId[h]),450)},300)}
+window.addEventListener("hashchange",()=>{const m=location.hash.slice(1).split("/"), h=m[0]; if(h&&byId[h]&&byId[h]!==sel){choose(byId[h]); if(m[1]==="fiche"&&byId[h].f) setTimeout(()=>openFull(byId[h]),450)}});
 }).catch(e=>{console.error(e); document.getElementById("map").innerHTML='<p style="padding:120px 24px">La carte n\'a pas pu se charger. Rechargez la page.</p>'});
 </script>
