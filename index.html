@@ -658,6 +658,14 @@ body:has(.results.on) header{z-index:60}
 /* « Partager l'appli » */
 .hlink.shareapp{margin-top:8px;font-weight:600;color:var(--muted)}
 .shareapp2{margin-top:12px}
+/* bulle de survol : sans pointe (elle semblait désigner un autre endroit), juste à côté du pointeur */
+#tip:after{display:none!important}
+#tip{transform:translate(14px,calc(-100% - 10px))!important;border-radius:10px}
+#tip.gauche{transform:translate(calc(-100% - 14px),calc(-100% - 10px))!important}
+#tip.dessous{transform:translate(14px,18px)!important}
+#tip.gauche.dessous{transform:translate(calc(-100% - 14px),18px)!important}
+#tip.acote{transform:translate(-50%,-100%)!important}
+#tip.acote.dessous{transform:translate(-50%,0)!important}
 /* dé « commune au hasard » retiré (Nicolas, 25/11/2026) */
 #rndBtn,.hbonus{display:none!important}
 </style>
@@ -947,9 +955,9 @@ function styleOf(f){
 }
 const comLayer=L.geoJSON(GJ,{style:styleOf,onEachFeature:(f,l)=>{
   const it=byId[f.id]; if(!it) return; it.layer=l;
-  l.on("mouseover",e=>{if(it!==sel) l.setStyle(plain()?{fillColor:PGH[it.p.pg]||"#B77E9E"}:{fillOpacity:0.18,weight:1.5,opacity:.9}); showTip(e.originalEvent,nameA(it),tipB(it)+hintOf(it)); if(it.snd.length) resolve(it.snd[0].f)});
+  l.on("mouseover",e=>{tipBox=l; if(it!==sel) l.setStyle(plain()?{fillColor:PGH[it.p.pg]||"#B77E9E"}:{fillOpacity:0.18,weight:1.5,opacity:.9}); showTip(e.originalEvent,nameA(it),tipB(it)+hintOf(it)); if(it.snd.length) resolve(it.snd[0].f)});
   l.on("mousemove",e=>moveTip(e.originalEvent));
-  l.on("mouseout",()=>{comLayer.resetStyle(l); hideTip()});
+  l.on("mouseout",()=>{comLayer.resetStyle(l); tipBox=null; hideTip()});
   l.on("click",e=>{L.DomEvent.stopPropagation(e); if(PLACE){PLACE(e.latlng); return} unlockAudio(); if(it===sel) choose(it,"fort",false); else choose(it,false,true)});
 }}).addTo(map);
 // voile autour du département et contour
@@ -1054,7 +1062,19 @@ function setLang(l){
 /* ---------- Bulle ---------- */
 const tip=$("#tip");
 function showTip(e,a,b){if(!e||e.pointerType==="touch") return; tip.querySelector("b").textContent=a; tip.querySelector("span").textContent=b; moveTip(e); tip.classList.add("on")}
-function moveTip(e){if(!e) return; tip.style.left=e.clientX+"px"; tip.style.top=e.clientY+"px"}
+/* bulle de survol : posée au-dessus de la commune (jamais dessus), sinon juste en dessous */
+let tipBox=null;
+function moveTip(e){if(!e) return;
+  tip.classList.remove("gauche","dessous","acote");
+  if(tipBox){const b=tipBox.getBounds(), mr=map.getContainer().getBoundingClientRect(),
+      nw=map.latLngToContainerPoint(b.getNorthWest()), se=map.latLngToContainerPoint(b.getSouthEast()),
+      top=mr.top+nw.y, bot=mr.top+se.y, h=tip.offsetHeight||48, w=tip.offsetWidth||180,
+      x=Math.max(w/2+8,Math.min(window.innerWidth-w/2-8,e.clientX));
+    tip.classList.add("acote");
+    if(top-h-10>HD.offsetHeight+6){tip.style.left=x+"px"; tip.style.top=(top-8)+"px"}
+    else {tip.style.left=x+"px"; tip.style.top=(bot+8)+"px"; tip.classList.add("dessous")}
+    return}
+  tip.style.left=e.clientX+"px"; tip.style.top=e.clientY+"px"; tip.classList.toggle("gauche",e.clientX>window.innerWidth-300); tip.classList.toggle("dessous",e.clientY<(HD.offsetHeight+90))}
 function hideTip(){tip.classList.remove("on")}
 
 /* ---------- Audio ---------- */
@@ -1074,7 +1094,7 @@ const playHTML=lbl=>`<span class="ic"><svg class="tri" viewBox="0 0 12 12"><path
 const ipa=f=>f.els.map(e=>e.pron).filter(Boolean).join(" · ");
 const rattach=p=>p.act!==p.fr?`<span class="rattach">Ancienne commune · aujourd'hui ${esc(p.act)}</span>`:"";
 const mod=it=>EDITS[it.p.id]?`<span class="modif">MODIFIÉ</span>`:"";
-function hintOf(it){const n=it.mt.h.length+it.mt.r.length+it.mt.o.length; return n?" · "+T("bulle_noms",n):""}
+function hintOf(it){const n=it.mt.h.length+it.mt.r.length+it.mt.o.length; return n?" · "+(n===1?"1 nom de lieu":T("bulle_noms",n)):""}
 function nPlaces(it){const l=it.layer; if(!l) return 0; const b=l.getBounds(); return MT.filter(o=>b.contains([o.lat,o.lon])).length}
 function soundBtns(it){const fr=it.raw&&it.raw.sonfr, oc=it.snd.length, frFirst=LANG==="fr"&&fr;
   const b=(cls,src,l)=>`<button class="play ${cls}" data-src="${esc(src)}">${playHTML(l)}</button>`;
