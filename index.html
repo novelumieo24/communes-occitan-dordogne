@@ -670,6 +670,16 @@ body:has(.results.on) header{z-index:60}
 .rvlab{background:none;border:0}
 .rvlab span{display:block;transform:translate(-50%,-50%);white-space:nowrap;font-style:italic;font-weight:600;font-size:12.5px;letter-spacing:.02em;color:#2F6E9E;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 2px #fff,0 0 2px #fff;pointer-events:none}
 body.full-open .demo{display:none!important}
+/* fenêtre « Vous aimez la carte ? » (après 10 communes) */
+.soutbox{position:relative;text-align:left}
+.soutlivre{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1.5px solid var(--line);border-radius:12px;background:#FBF8EF;color:var(--ink);text-decoration:none;margin-top:4px}
+.soutlivre img{width:70px;height:auto;border-radius:3px;box-shadow:0 3px 10px rgba(0,0,0,.18);flex:none}
+.soutlivre span{font-size:13.5px;line-height:1.45}
+.soutlivre b{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--plum);margin-bottom:2px}
+.soutlivre em{display:block;font-style:normal;font-weight:700;color:var(--plum);margin-top:4px}
+.soutlivre:hover{border-color:var(--plum)}
+.soutdon{margin:14px 0 0;font-size:14px;line-height:1.5;color:#4B3A44}
+.soutbtn{display:flex!important;align-items:center;justify-content:center;gap:8px;text-decoration:none;margin-top:10px!important}
 /* livre (avec sa couverture) et don bien visible */
 .bookcard img{width:92px;height:auto;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,.18);flex:none}
 .doncard{margin-top:14px;padding:16px 18px;border-radius:14px;background:var(--plum-l);border:1.5px solid #E2C6D6}
@@ -678,9 +688,9 @@ body.full-open .demo{display:none!important}
 .doncard p{margin:6px 0 12px!important;font-size:14px;line-height:1.5;color:#4B3A44}
 .donbtn2{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 20px;border-radius:21px;background:var(--plum);color:#fff!important;font-weight:800;font-size:15px;text-decoration:none!important;box-shadow:0 3px 10px rgba(136,68,107,.35)}
 .donbtn2:hover{background:var(--plum-d)}
-.donhelp-t{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:14px;padding:12px;border-radius:12px;background:var(--plum-l);font-size:13px;color:#4B3A44;text-align:center}
-.donhelp-t .donhelp{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:18px;background:var(--plum);color:#fff;font-weight:800;text-decoration:none}
-.donhelp-t .donhelp:hover{background:var(--plum-d)}
+.donhelp-t{margin:12px 0 0;font-size:13.5px;color:var(--muted);text-align:center}
+.donhelp-t[hidden]{display:none!important}
+.donhelp-t .donhelp{color:var(--plum);font-weight:700;text-decoration:underline}
 /* livre et soutien */
 .soutien{margin-top:22px}
 .bookcard{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:#FBF8EF;color:var(--ink);text-decoration:none}
@@ -776,7 +786,7 @@ body.full-open .demo{display:none!important}
 <p>Enregistrements sonores : collection Novelum. Les personnes enregistrées ne sont pas nommées ; leurs voix ne peuvent pas être réutilisées sans autorisation.</p>
 <p>Contours des communes : IGN et INSEE, Licence Ouverte (Etalab). Fonds de carte : IGN Géoplateforme ; OpenStreetMap et rendu occitan d’OpenStreetMap. Lieux-dits, rues et rivières en occitan : © contributeurs d’OpenStreetMap, licence ODbL.</p>
 <h3>Données personnelles</h3><p>Le site ne demande aucun compte et ne collecte aucune donnée personnelle. La position utilisée par « Me localiser », si vous l’autorisez, reste dans votre navigateur. Quand vous cherchez une rue, le texte tapé est envoyé au service d’adresses de l’IGN (Géoplateforme) pour la trouver ; rien d’autre n’est transmis. Le bouton « Une question, une remarque ? » envoie votre message par e-mail à Novelum – IEO Perigòrd, par l’intermédiaire du service d’envoi Web3Forms ; votre nom et votre e-mail sont facultatifs et servent seulement à vous répondre, ils ne sont pas publiés. Pour exercer vos droits ou poser une question : [contact à compléter].</p>
-<h3>Cookies</h3><p>Le site n’utilise ni cookie publicitaire ni outil de mesure d’audience. Il garde seulement, dans votre navigateur, quelques réglages pratiques : la langue choisie, « texte plus grand » et le fait d’avoir déjà vu le mode d’emploi. Ces réglages ne servent qu’à vous et ne sont transmis à personne ; vous pouvez les effacer depuis les réglages de votre navigateur. C’est pourquoi aucun bandeau de consentement n’est affiché.</p>
+<h3>Cookies</h3><p><span data-gc-off>Le site n’utilise ni cookie publicitaire ni outil de mesure d’audience.</span><span data-gc-on hidden>Le site n’utilise aucun cookie. Pour savoir combien de personnes le consultent, il compte les visites de façon anonyme avec GoatCounter (service européen) : aucune donnée n’est enregistrée sur votre appareil, votre adresse IP n’est pas conservée, et les visiteurs qui demandent à « ne pas être suivis » ne sont pas comptés.</span> Il garde seulement, dans votre navigateur, quelques réglages pratiques : la langue choisie, « texte plus grand » et le fait d’avoir déjà vu le mode d’emploi. Ces réglages ne servent qu’à vous et ne sont transmis à personne ; vous pouvez les effacer depuis les réglages de votre navigateur. C’est pourquoi aucun bandeau de consentement n’est affiché.</p>
 <p>Les fonds de carte sont chargés depuis les serveurs de l’IGN et d’OpenStreetMap, qui reçoivent donc, comme pour tout site, l’adresse technique (IP) de votre appareil.</p>
 <p class="psrc">Maquette : ces mentions sont à faire relire et compléter avant la mise en ligne.</p></div>
   </div></section>
@@ -791,6 +801,15 @@ body.full-open .demo{display:none!important}
 
 <div id="placeMsg" class="placemsg" role="status" hidden><span></span><button id="placeCancel">Annuler</button></div>
 <div id="toast" class="toast" role="status" hidden></div>
+<div id="soutienBox" class="help" role="dialog" aria-modal="true" aria-labelledby="soutT" hidden><div class="hbox soutbox">
+  <button type="button" class="askx" data-soutclose aria-label="Fermer">✕</button>
+  <h2 id="soutT">Vous aimez la carte ?</h2>
+  <p class="hsub" id="soutN">Vous venez de découvrir le nom occitan de 10 communes !</p>
+  <a class="soutlivre" data-livre target="_blank" rel="noopener"><img src="img/livre-dico.jpg" alt="" width="70" height="105"><span><b>Pour aller plus loin</b>Toutes les communes, leurs formes anciennes et l’histoire de leur nom : <i>Dictionnaire toponymique des communes de Dordogne</i><em>Se procurer le livre →</em></span></a>
+  <p class="soutdon">Cette carte est gratuite, sans publicité, et réalisée par une petite association. Si elle vous plaît, soutenez cette initiative.</p>
+  <a class="play hgo soutbtn" data-don target="_blank" rel="noopener">♡ Faire un don</a>
+  <button class="hlink" type="button" data-soutclose>Plus tard, je continue à explorer</button>
+</div></div>
 <div id="askBox" class="help" role="dialog" aria-modal="true" aria-labelledby="askT" hidden><form class="hbox askform" novalidate>
   <button type="button" class="askx" aria-label="Fermer">✕</button>
   <h2 id="askT">Une question, une remarque ?</h2>
@@ -852,7 +871,7 @@ body.full-open .demo{display:none!important}
   <button class="play hgo" id="hGo">C’est parti</button>
   <button class="hlink" id="hMore">Tout savoir sur la carte</button>
   <button class="hlink shareapp" type="button" data-shareapp>Partager l’appli avec vos proches</button>
-  <div class="donhelp-t" data-donwrap hidden><span>Gratuite et sans publicité, cette carte vit grâce à vous.</span><a class="donhelp" data-don target="_blank" rel="noopener" hidden>Soutenez cette initiative · Faire un don</a></div>
+  <p class="donhelp-t" data-donwrap hidden>♡ Soutenez cette initiative : <a class="donhelp" data-don target="_blank" rel="noopener" hidden>faites un don</a></p>
   <button class="ghost instbtn" id="instBtn" type="button" hidden><svg class="appico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg> Installer l’application sur mon téléphone</button>
   <div class="insthelp" id="instHelp" hidden><b>Sur iPhone ou iPad :</b> touchez <span aria-hidden="true">⎙</span> <b>Partager</b> en bas de Safari, puis <b>« Sur l’écran d’accueil »</b>. La carte s’ouvrira comme une appli.</div>
 </div></div>
@@ -1222,7 +1241,23 @@ function seeingHTML(it){const m=it.mt, tot=m.h.length+m.r.length+m.o.length, adm
   const dels=adm&&it.mtDel.length?`<h5>Supprimés · ${it.mtDel.length}</h5><ul>${it.mtDel.map(o=>`<li class="adm deleted"><button data-edmt="${MT.indexOf(o)}"><b>${esc(nm(o))}</b><span>rétablir…</span></button></li>`).join("")}</ul>`:"";
   return `<div class="seeing"><button class="ghost listbtn" data-list aria-expanded="${listOpen}">${esc(listOpen?T("vig_masquer"):T("vig_liste",tot))}</button>
     ${addBtn}<div class="mtlist"${listOpen?"":" hidden"}>${grp("h",esc(T("grp_h")))}${grp("r",esc(T("grp_r")))}${grp("o",esc(T("grp_o")))}${dels}</div></div>`}
-function choose(it,zoom=true,autoplay=false){
+/* ---------- Mesure d'audience GoatCounter : anonyme, sans cookie, rien d'écrit sur l'appareil ----------
+   Éteinte tant que GC_NOM est vide. Seulement sur le site en ligne (https), jamais sur le Mac.
+   Le navigateur qui demande « ne pas me suivre » n'est pas compté. */
+const GC_NOM="novelum";
+function compter(chemin,titre,evenement){try{
+  if(!GC_NOM||location.protocol!=="https:"||navigator.doNotTrack==="1"||window.doNotTrack==="1") return;
+  const u="https:\/\/"+GC_NOM+".goatcounter.com/count?p="+encodeURIComponent(chemin)+"&t="+encodeURIComponent(titre||"")
+    +(evenement?"&e=true":"&r="+encodeURIComponent(document.referrer||""))+"&s="+encodeURIComponent(screen.width+","+screen.height+","+(window.devicePixelRatio||1))+"&rnd="+Math.random().toString(36).slice(2);
+  if(navigator.sendBeacon) navigator.sendBeacon(u); else (new Image()).src=u}catch(e){}}
+compter(location.pathname||"/","Carte des noms occitans");
+const SOUT_N=10, SOUT_JOURS=30;
+function soutienCompte(it){try{
+  if(!DON_URL) return; const v=JSON.parse(sessionStorage.getItem("noms.vues")||"[]"); if(v.includes(it.p.id)) return; v.push(it.p.id); sessionStorage.setItem("noms.vues",JSON.stringify(v));
+  const dernier=+localStorage.getItem("noms.soutien")||0; if(v.length<SOUT_N||Date.now()-dernier<SOUT_JOURS*864e5) return;
+  localStorage.setItem("noms.soutien",String(Date.now()));
+  setTimeout(()=>{if(fullOpen()||!$("#askBox").hidden||!help.hidden) return; $("#soutN").textContent="Vous venez de découvrir le nom occitan de "+v.length+" communes !"; $("#soutienBox").hidden=false; $("#soutienBox [data-soutclose]").focus()},2200)}catch(e){}}
+function choose(it,zoom=true,autoplay=false){soutienCompte(it); if(it!==sel) compter("commune/"+it.p.id,it.p.fr,true);
   const prev=sel; sel=it; if(prev&&prev.layer) comLayer.resetStyle(prev.layer); if(prev) relabelOne(prev);
   if(it.layer){comLayer.resetStyle(it.layer); it.layer.bringToFront()}
   if(prev!==it){HI=PIN=null; listOpen=false; microOff()}
@@ -1651,7 +1686,9 @@ function openInfo(which){showMap(); document.body.classList.add("pageview"); clo
 {const sb=$("#srcBtn"); sb.onclick=()=>{const o=sb.parentNode.classList.toggle("open"); sb.setAttribute("aria-expanded",o)}}
 $("#vMob").onclick=()=>openInfo("mobile");
 document.querySelectorAll("[data-livre]").forEach(a=>a.href=LIVRE_URL);
-document.querySelectorAll("[data-don]").forEach(a=>{if(DON_URL){a.href=DON_URL; a.hidden=false; a.innerHTML=(a.classList.contains("donhelp")?HEART_ICO+" ":"")+a.innerHTML} });
+document.querySelectorAll("[data-gc-on]").forEach(x=>x.hidden=!GC_NOM); document.querySelectorAll("[data-gc-off]").forEach(x=>x.hidden=!!GC_NOM);
+{const sb=$("#soutienBox"), fermer=()=>{sb.hidden=true}; sb.querySelectorAll("[data-soutclose]").forEach(b=>b.onclick=fermer); sb.addEventListener("click",e=>{if(e.target===sb) fermer()}); document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!sb.hidden) fermer()}); sb.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setTimeout(fermer,300)))}
+document.querySelectorAll("[data-don]").forEach(a=>{if(DON_URL){a.href=DON_URL; a.hidden=false; a.innerHTML=a.innerHTML.replace("♡ ",a.classList.contains("soutbtn")?HEART_ICO+" ":"♡ ")} });
 document.querySelectorAll("[data-donwrap]").forEach(w=>w.hidden=!DON_URL);
 document.querySelectorAll("[data-shareapp]").forEach(b=>{b.innerHTML=b.innerHTML.replace("${SHARE_ICO_TXT}",SHARE_ICO); b.onclick=shareApp});
 ["#vMap","#vList","#vPron"].forEach(id=>$(id).addEventListener("click",()=>$("#vMob").setAttribute("aria-pressed","false")));
