@@ -713,6 +713,11 @@ body.touch .foot .cr .srcbtn,body.touch .foot .cr .infolinks button,body.touch .
   .foot .cr .srcbtn,.foot .cr .infolinks button{font-size:10.5px!important}
   .partner{padding:3px 6px!important;gap:6px!important}.partner img{height:24px!important;width:auto!important}
 }
+/* page « À propos » */
+.apchapo{font-size:16px!important;line-height:1.65!important;color:#2F353C!important;border-left:4px solid var(--lime);padding-left:14px}
+.aplist{margin:4px 0 10px;padding-left:20px}.aplist li{margin:5px 0;font-size:15px;line-height:1.5;color:#363C44}
+#infoAbout .bookcard{margin-top:16px}
+#hAbout{margin-top:4px}
 /* commune sans enregistrement : on le dit */
 .nosound{margin:10px 0 0;padding:9px 12px;border-radius:10px;background:var(--bg);color:var(--muted);font-size:13.5px;font-weight:600}
 /* livre (avec sa couverture) et don bien visible */
@@ -795,6 +800,21 @@ body.touch .foot .cr .srcbtn,body.touch .foot .cr .infolinks button,body.touch .
 <h3>Zoomer et se déplacer</h3><p>Molette de la souris ou boutons + et −, glisser pour se déplacer ; sur téléphone, pincer avec deux doigts. Le bouton aux quatre coins revient à toute la Dordogne.</p><h3>Fonds de carte</h3><p>Le bouton des couches (feuilles superposées) permet de choisir le fond : carte simple, plan IGN, satellite ou carte occitane d’OpenStreetMap. On y trouve aussi « Texte plus grand ».</p>
 <h3>Lieux-dits et rues en occitan</h3><p>Dans la vignette d’une commune, « Voir la liste des noms de lieux » affiche ses lieux-dits, hameaux et rues qui ont un nom occitan. Passer sur un nom de la liste le montre sur la carte.</p>
 <h3>Me localiser</h3><p>Le bouton « Me localiser », dans la case de recherche, montre où vous êtes et ouvre votre commune (le navigateur vous demande d’abord l’autorisation ; votre position n’est envoyée nulle part).</p></div>
+    <div id="infoAbout" hidden><h2>Pourquoi connaître l’origine des noms de lieux ?</h2>
+<p class="apchapo">À l’exception de son extrémité occidentale, le territoire du département de la Dordogne est historiquement de langue occitane, et c’est dans cette langue que ses noms de lieux, pour l’écrasante majorité d’entre eux, ont été créés ou façonnés. En effet, même les toponymes dont l’origine est antérieure à l’existence de l’occitan sont parvenus jusqu’à nous par son intermédiaire, et leur forme actuelle s’explique, y compris en français, par les évolutions phonétiques qui lui sont propres.</p>
+<h3>Ce que vous trouvez pour chaque commune</h3>
+<ul class="aplist"><li>la <b>forme occitane orale actuelle</b>, recueillie auprès de locuteurs locaux, et sa prononciation ;</li>
+<li>les <b>formes anciennes</b> documentées les plus remarquables ;</li>
+<li>les <b>hypothèses étymologiques</b> proposées par les linguistes, et leur étude critique ;</li>
+<li>la <b>signification probable</b> du nom ;</li>
+<li>la <b>forme occitane de référence</b> en graphie classique, établie à partir de l’étude du nom et dans le respect de la forme orale.</li></ul>
+<p>Toutes les personnes souhaitant connaître l’origine, la signification et l’évolution historique du nom des communes du Périgord, et tous les acteurs désireux de transmettre le sens et l’origine de ces noms, par exemple dans une signalétique bilingue, disposent ainsi d’une base de référence.</p>
+<h3>Un travail collectif</h3>
+<p>Ce travail d’étude toponymique a été réalisé par Jean Roux, avec la commission toponymie de Novelum (section Périgord de l’Institut d’Estudis Occitans), de 2002 à 2016. Animée par Jean Roux†, elle a réuni Michel Chadeuil, Daniel Chavaroche, Jean-Claude Dugros, Bénédicte Fénié, Bernard Lesfargues†, Jean-Louis Lévêque (coordinateur), Jean-Pierre Reydy et Jean Rigouste. La commission a retrouvé, chaque fois que c’était possible, les documents anciens eux-mêmes, ce qui a permis de corriger de nombreuses erreurs de lecture transmises par les ouvrages antérieurs, et elle a recueilli les formes orales auprès de locuteurs occitanophones.</p>
+<p>Les notices ont été rédigées par Étienne Roux, sous la supervision de Jean Roux, décédé avant l’édition définitive de l’ouvrage ; la mise à jour et la mise en forme finale ont été effectuées par Jean-Louis Lévêque.</p>
+<p class="psrc">D’après la préface de Jean-Louis Lévêque et Étienne Roux, <i>Dictionnaire toponymique des communes de Dordogne</i>, Jean Roux, © Novelum – IEO Perigòrd et Lo Congrès permanent de la lenga occitana, 2020. Ouvrage publié avec l’aide du conseil régional de Nouvelle-Aquitaine et le soutien du conseil départemental de la Dordogne.</p>
+<a class="bookcard" data-livre target="_blank" rel="noopener"><img src="img/livre-dico.jpg" alt="Couverture du Dictionnaire toponymique des communes de Dordogne" width="92" height="137" loading="lazy"><span><b>Le livre</b><i>Dictionnaire toponymique des communes de Dordogne</i>, Jean Roux (Novelum – Lo Congrès)<em>Se procurer le livre →</em></span></a>
+</div>
     <div id="infoMobile" hidden>
 <div class="apphero"><img src="img/icone-192.png" alt="" width="84" height="84">
   <div><h2>Installez l’application sur votre téléphone</h2>
@@ -905,6 +925,7 @@ body.touch .foot .cr .srcbtn,body.touch .foot .cr .infolinks button,body.touch .
   <p class="hbonus">Envie de découvrir ? Le bouton <span class="hdice" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.3" fill="currentColor"/><circle cx="15" cy="15" r="1.3" fill="currentColor"/><circle cx="15" cy="9" r="1.3" fill="currentColor"/><circle cx="9" cy="15" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></svg></span> fait entendre une commune au hasard.</p>
   <button class="play hgo" id="hGo">C’est parti</button>
   <button class="hlink" id="hMore">Tout savoir sur la carte</button>
+  <button class="hlink" id="hAbout" type="button">Pourquoi l’origine des noms ?</button>
   <p class="donhelp-t" data-donwrap hidden>♡ Soutenez cette initiative : <a class="donhelp" data-don target="_blank" rel="noopener" hidden>faites un don</a></p>
   <button class="ghost instbtn" id="instBtn" type="button" hidden><svg class="appico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg> Installer l’application sur mon téléphone</button>
   <div class="insthelp" id="instHelp" hidden><b>Sur iPhone ou iPad :</b> touchez <span aria-hidden="true">⎙</span> <b>Partager</b> en bas de Safari, puis <b>« Sur l’écran d’accueil »</b>. La carte s’ouvrira comme une appli.</div>
@@ -926,7 +947,7 @@ body.touch .foot .cr .srcbtn,body.touch .foot .cr .infolinks button,body.touch .
     
     <div class="partner"><span><span data-t="part1" data-tg="Bas de page" data-tl="Partenariat, 1re ligne">Novelum – IEO Perigòrd</span><br><span data-t="part2" data-tg="Bas de page" data-tl="Partenariat, 2e ligne">en partenariat avec le Département de la Dordogne</span></span><img src="img/novelum.png" alt="Novelum – IEO Perigòrd" width="44" height="44" style="height:44px"><a class="dep-link" href="https://www.dordogne.fr" target="_blank" rel="noopener" title="dordogne.fr"><img src="img/dordonha.png" alt="Dordonha Perigòrd, lo Departament : site du Département (nouvelle fenêtre)" width="220" height="94"></a></div>
   </div>
-  <div class="cr"><button class="srcbtn" id="srcBtn" type="button" aria-expanded="false" aria-controls="credTxt">Sources</button><span id="credTxt" data-t="credits" data-tg="Bas de page" data-tl="Sources et crédits (en bas à droite)">Fonds : IGN Géoplateforme · Lieux-dits et rues en occitan © OpenStreetMap (ODbL) · Noms des communes : J. Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020</span> · <span class="infolinks"><a href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener">Télécharger la carte (PDF)</a> · <a href="#" data-livre target="_blank" rel="noopener">Le dictionnaire</a><span data-donwrap hidden> · <a href="#" data-don target="_blank" rel="noopener">Faire un don</a></span> · <button id="lnkUsage">Comment utiliser la carte</button> · <button id="lnkLegal">Mentions légales</button></span> · <button class="adminlink" id="admOn" hidden style="display:none">Administration</button></div>
+  <div class="cr"><button class="srcbtn" id="srcBtn" type="button" aria-expanded="false" aria-controls="credTxt">Sources</button><span id="credTxt" data-t="credits" data-tg="Bas de page" data-tl="Sources et crédits (en bas à droite)">Fonds : IGN Géoplateforme · Lieux-dits et rues en occitan © OpenStreetMap (ODbL) · Noms des communes : J. Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020</span> · <span class="infolinks"><a href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener">Télécharger la carte (PDF)</a> · <a href="#" data-livre target="_blank" rel="noopener">Le dictionnaire</a><span data-donwrap hidden> · <a href="#" data-don target="_blank" rel="noopener">Faire un don</a></span> · <button id="lnkAbout">À propos</button> · <button id="lnkUsage">Comment utiliser la carte</button> · <button id="lnkLegal">Mentions légales</button></span> · <button class="adminlink" id="admOn" hidden style="display:none">Administration</button></div>
 </div>
 
 <audio id="au" preload="none"></audio>
@@ -1732,7 +1753,7 @@ function openHelp(){help.hidden=false; $("#hGo").focus()}
 $("#hGo").onclick=()=>{help.hidden=true; try{localStorage.setItem("noms.vu","1")}catch(e){} /* au clavier : on peut taper tout de suite le nom de sa commune */ if(!document.body.classList.contains("touch")) setTimeout(()=>$("#q").focus(),30)};
 help.addEventListener("click",e=>{if(e.target===help) $("#hGo").click()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!help.hidden) $("#hGo").click()});
-function openInfo(which){showMap(); document.body.classList.add("pageview"); closeCard(); const pg=$("#info"); pg.classList.add("on"); $("#infoUsage").hidden=which!=="usage"; $("#infoLegal").hidden=which!=="legal"; $("#infoMobile").hidden=which!=="mobile"; $("#vMob").setAttribute("aria-pressed",which==="mobile"); if(which==="mobile") $("#vMap").setAttribute("aria-pressed","false"); pg.scrollTop=0; $("#infoBack").focus()}
+function openInfo(which){showMap(); document.body.classList.add("pageview"); closeCard(); const pg=$("#info"); pg.classList.add("on"); $("#infoUsage").hidden=which!=="usage"; $("#infoLegal").hidden=which!=="legal"; $("#infoMobile").hidden=which!=="mobile"; $("#infoAbout").hidden=which!=="about"; $("#vMob").setAttribute("aria-pressed",which==="mobile"); if(which==="mobile") $("#vMap").setAttribute("aria-pressed","false"); pg.scrollTop=0; $("#infoBack").focus()}
 {const sb=$("#srcBtn"); sb.onclick=()=>{const o=sb.parentNode.classList.toggle("open"); sb.setAttribute("aria-expanded",o)}}
 $("#vMob").onclick=()=>openInfo("mobile");
 /* clic sur le titre ou le petit logo : retour à la carte d'accueil (toute la Dordogne) */
@@ -1747,7 +1768,8 @@ document.querySelectorAll("[data-don]").forEach(a=>{if(DON_URL){a.href=DON_URL; 
 document.querySelectorAll("[data-donwrap]").forEach(w=>w.hidden=!DON_URL);
 document.querySelectorAll("[data-shareapp]").forEach(b=>{b.innerHTML=b.innerHTML.replace("${SHARE_ICO_TXT}",SHARE_ICO); b.onclick=shareApp});
 ["#vMap","#vList","#vPron"].forEach(id=>$(id).addEventListener("click",()=>$("#vMob").setAttribute("aria-pressed","false")));
-$("#lnkUsage").onclick=()=>openInfo("usage"); $("#lnkLegal").onclick=()=>openInfo("legal");
+$("#lnkUsage").onclick=()=>openInfo("usage");
+$("#lnkAbout").onclick=()=>openInfo("about"); $("#hAbout").onclick=()=>{$("#hGo").click(); openInfo("about")}; $("#lnkLegal").onclick=()=>openInfo("legal");
 $("#hMore").onclick=()=>{$("#hGo").click(); openInfo("usage")};
 $("#infoBack").onclick=()=>showMap();
 $("#helpAgain").onclick=()=>{toggleLayers(false); openHelp()};
