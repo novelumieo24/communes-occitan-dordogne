@@ -666,6 +666,37 @@ body:has(.results.on) header{z-index:60}
 #tip.gauche.dessous{transform:translate(calc(-100% - 14px),18px)!important}
 #tip.acote{transform:translate(-50%,-100%)!important}
 #tip.acote.dessous{transform:translate(-50%,0)!important}
+/* noms des cours d'eau */
+.rvlab{background:none;border:0}
+.rvlab span{display:block;transform:translate(-50%,-50%);white-space:nowrap;font-style:italic;font-weight:600;font-size:12.5px;letter-spacing:.02em;color:#2F6E9E;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 2px #fff,0 0 2px #fff;pointer-events:none}
+body.full-open .demo{display:none!important}
+/* livre (avec sa couverture) et don bien visible */
+.bookcard img{width:92px;height:auto;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,.18);flex:none}
+.doncard{margin-top:14px;padding:16px 18px;border-radius:14px;background:var(--plum-l);border:1.5px solid #E2C6D6}
+.donhead{display:flex;align-items:center;gap:8px;color:var(--plum-d)}
+.donhead b{font-size:16px;font-weight:800}
+.doncard p{margin:6px 0 12px!important;font-size:14px;line-height:1.5;color:#4B3A44}
+.donbtn2{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 20px;border-radius:21px;background:var(--plum);color:#fff!important;font-weight:800;font-size:15px;text-decoration:none!important;box-shadow:0 3px 10px rgba(136,68,107,.35)}
+.donbtn2:hover{background:var(--plum-d)}
+.donhelp-t{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:14px;padding:12px;border-radius:12px;background:var(--plum-l);font-size:13px;color:#4B3A44;text-align:center}
+.donhelp-t .donhelp{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:18px;background:var(--plum);color:#fff;font-weight:800;text-decoration:none}
+.donhelp-t .donhelp:hover{background:var(--plum-d)}
+/* livre et soutien */
+.soutien{margin-top:22px}
+.bookcard{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:#FBF8EF;color:var(--ink);text-decoration:none}
+.bookcard svg{flex:none;color:var(--plum);margin-top:2px}
+.bookcard span{font-size:14px;line-height:1.5}
+.bookcard b{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--plum);margin-bottom:3px}
+.bookcard em{display:block;font-style:normal;font-weight:700;color:var(--plum);margin-top:6px}
+.bookcard:hover{border-color:var(--plum);background:#fff}
+.donline{margin:12px 2px 0!important;font-size:13.5px;color:var(--muted)}
+.donline a{color:var(--plum);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:5px;vertical-align:-3px}
+.donline a:hover{text-decoration:underline}
+.donhelp-t{margin:10px 0 0;font-size:13px;color:var(--muted);text-align:center;line-height:1.45}
+.donhelp-t[hidden]{display:none!important}
+.donhelp{display:inline-flex;align-items:center;gap:4px;font-weight:700;color:var(--plum);vertical-align:-3px}
+.donbtn{display:inline-flex!important;margin-left:4px;padding:4px 12px;border:1.5px solid var(--plum);border-radius:18px;text-decoration:none!important}
+.donbtn:hover{background:var(--plum);color:#fff!important}
 /* dé « commune au hasard » retiré (Nicolas, 25/11/2026) */
 #rndBtn,.hbonus{display:none!important}
 </style>
@@ -797,6 +828,7 @@ body:has(.results.on) header{z-index:60}
   </div>
   <h2 style="margin-top:14px" data-t="couches_sur" data-tg="Panneau des fonds de carte" data-tl="Titre « Sur la carte »">Sur la carte</h2>
   <label><input type="checkbox" data-l="labs" checked><span><span data-t="couche_noms" data-tg="Panneau des fonds de carte" data-tl="Case « Noms des communes »">Noms des communes</span><small data-t="couche_noms_aide" data-tg="Panneau des fonds de carte" data-tl="Petit texte sous la case">Apparaissent en zoomant</small></span></label>
+  <label><input type="checkbox" data-l="rv" checked><span>Cours d’eau<small>Rivières principales, en français ou en occitan</small></span></label>
   <h2 style="margin-top:14px">Affichage</h2>
   <label><input type="checkbox" id="bigTxt"><span>Texte plus grand</span></label>
   <label class="hl"><button class="howread" id="helpAgain" type="button">Revoir le mode d’emploi</button></label>
@@ -820,6 +852,7 @@ body:has(.results.on) header{z-index:60}
   <button class="play hgo" id="hGo">C’est parti</button>
   <button class="hlink" id="hMore">Tout savoir sur la carte</button>
   <button class="hlink shareapp" type="button" data-shareapp>Partager l’appli avec vos proches</button>
+  <div class="donhelp-t" data-donwrap hidden><span>Gratuite et sans publicité, cette carte vit grâce à vous.</span><a class="donhelp" data-don target="_blank" rel="noopener" hidden>Soutenez cette initiative · Faire un don</a></div>
   <button class="ghost instbtn" id="instBtn" type="button" hidden><svg class="appico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg> Installer l’application sur mon téléphone</button>
   <div class="insthelp" id="instHelp" hidden><b>Sur iPhone ou iPad :</b> touchez <span aria-hidden="true">⎙</span> <b>Partager</b> en bas de Safari, puis <b>« Sur l’écran d’accueil »</b>. La carte s’ouvrira comme une appli.</div>
 </div></div>
@@ -840,7 +873,7 @@ body:has(.results.on) header{z-index:60}
     
     <div class="partner"><span><span data-t="part1" data-tg="Bas de page" data-tl="Partenariat, 1re ligne">Novelum – IEO Perigòrd</span><br><span data-t="part2" data-tg="Bas de page" data-tl="Partenariat, 2e ligne">en partenariat avec le Département de la Dordogne</span></span><img src="img/novelum.png" alt="Novelum – IEO Perigòrd" width="44" height="44" style="height:44px"><a class="dep-link" href="https://www.dordogne.fr" target="_blank" rel="noopener" title="dordogne.fr"><img src="img/dordonha.png" alt="Dordonha Perigòrd, lo Departament : site du Département (nouvelle fenêtre)" width="220" height="94"></a></div>
   </div>
-  <div class="cr"><button class="srcbtn" id="srcBtn" type="button" aria-expanded="false" aria-controls="credTxt">Sources</button><span id="credTxt" data-t="credits" data-tg="Bas de page" data-tl="Sources et crédits (en bas à droite)">Fonds : IGN Géoplateforme · Lieux-dits et rues en occitan © OpenStreetMap (ODbL) · Noms des communes : J. Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020</span> · <span class="infolinks"><a href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener">Télécharger la carte (PDF)</a> · <button id="lnkUsage">Comment utiliser la carte</button> · <button id="lnkLegal">Mentions légales</button></span> · <button class="adminlink" id="admOn" hidden style="display:none">Administration</button></div>
+  <div class="cr"><button class="srcbtn" id="srcBtn" type="button" aria-expanded="false" aria-controls="credTxt">Sources</button><span id="credTxt" data-t="credits" data-tg="Bas de page" data-tl="Sources et crédits (en bas à droite)">Fonds : IGN Géoplateforme · Lieux-dits et rues en occitan © OpenStreetMap (ODbL) · Noms des communes : J. Roux, Dictionnaire toponymique des communes de Dordogne, Novelum – Lo Congrès, 2020</span> · <span class="infolinks"><a href="carte-noms-occitans-dordogne.pdf" target="_blank" rel="noopener">Télécharger la carte (PDF)</a> · <a href="#" data-livre target="_blank" rel="noopener">Le dictionnaire</a><span data-donwrap hidden> · <a href="#" data-don target="_blank" rel="noopener">Faire un don</a></span> · <button id="lnkUsage">Comment utiliser la carte</button> · <button id="lnkLegal">Mentions légales</button></span> · <button class="adminlink" id="admOn" hidden style="display:none">Administration</button></div>
 </div>
 
 <audio id="au" preload="none"></audio>
@@ -988,6 +1021,14 @@ map.setMaxBounds(homeB.pad(1.5));
 const labLayer=L.layerGroup().addTo(map), mtLayer=L.layerGroup().addTo(map), cityLayer=L.layerGroup().addTo(map);
 const lblIcon=(txt,cls)=>L.divIcon({className:"clab "+(cls||""),html:"<span>"+esc(txt)+"</span>",iconSize:[0,0]});
 items.forEach(it=>{const c=it.gf.properties.lab; it.mk=L.marker([c[1],c[0]],{icon:lblIcon(""),interactive:false,keyboard:false});});
+/* ---------- Cours d'eau (tracés de data.json convertis : lon = x × 0,0014166891 ; lat = 45,1 − y ÷ 1000) ---------- */
+map.createPane("rivieres"); map.getPane("rivieres").style.zIndex=405; map.getPane("rivieres").style.pointerEvents="none";
+const rvLines=L.layerGroup(), rvLabLayer=L.layerGroup().addTo(map);
+const rvIcon=t=>L.divIcon({className:"rvlab",html:"<span>"+esc(t)+"</span>",iconSize:[0,0]});
+const RV=(D.rivers||[]).map(r=>{const parts=[]; r.d.split(/(?=M)/).forEach(seg=>{const pts=[]; seg.replace(/[ML]\s*(-?[\d.]+)[ ,](-?[\d.]+)/g,(m,x,y)=>{pts.push([45.1-(+y)/1000,(+x)*0.0014166891])}); if(pts.length>1) parts.push(pts)});
+  parts.forEach(pts=>L.polyline(pts,{pane:"rivieres",color:"#4F93CF",weight:Math.max(1.2,(r.w||1)*1.25),opacity:.9,lineCap:"round",lineJoin:"round",interactive:false}).addTo(rvLines));
+  const main=parts.slice().sort((a,b)=>b.length-a.length)[0]||[[0,0]]; const at=main[Math.floor(main.length*0.45)];
+  return {fr:(r.n||"").replace(/^(La |Le |L’|L')/,""), oc:r.oc||"", mk:L.marker(at,{icon:rvIcon(""),interactive:false,keyboard:false}), _t:null}});
 const CITIES=(D.cities_ll||[]).map(c=>({...c,mk:L.marker([c.ll[1],c.ll[0]],{icon:lblIcon(""),interactive:false,keyboard:false,zIndexOffset:1000})}));
 const KIND={h:"hameau",i:"lieu-dit",l:"lieu-dit",q:"quartier",p:"sommet",r:"rue ou chemin",e:"cours d'eau, source",b:"bois",m:"patrimoine, lieu"};
 let LD={}; if(MODS&&MODS.lieux) LD=MODS.lieux; else try{LD=JSON.parse(store.get("noms.lieux")||"{}")}catch(e){} LD.ed=LD.ed||{}; LD.add=LD.add||[];
@@ -1007,7 +1048,7 @@ const MT=(D.places_ll||[]).map((a,i)=>({id:"o"+i,lon:a[0],lat:a[1],fr:a[2],oc:a[
 LD.add.forEach(a=>MT.push({...a,added:true}));
 MT.forEach(o=>{o.orig={fr:o.fr,oc:o.oc,k:o.k,lat:o.lat,lon:o.lon,del:false}; const e=LD.ed[o.id]; if(e) Object.assign(o,e); mkMT(o)});
 let PLACE=null;
-const LAY={labs:true};
+const LAY={labs:true,rv:true};
 function inRing(x,y,r){let c=false; for(let i=0,j=r.length-1;i<r.length;j=i++){const [xi,yi]=r[i],[xj,yj]=r[j]; if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi)) c=!c} return c}
 function inGeom(x,y,g){const ps=g.type==="Polygon"?[g.coordinates]:g.coordinates; return ps.some(p=>inRing(x,y,p[0])&&!p.slice(1).some(h=>inRing(x,y,h)))}
 const GRP=k=>"hilq".includes(k)?"h":k==="r"?"r":"o";
@@ -1044,6 +1085,9 @@ function refresh(){
   if(sel){show(sel.mk,true,labLayer); fits(sel.mk.getLatLng(),nameA(sel),14,10)}
   if(HI&&HI.mk&&HI.com===sel&&listOpen){show(HI.mk,true,mtLayer); fits(HI.mk.getLatLng(),LANG==="oc"?HI.oc:HI.fr,15,10)}
   CITIES.forEach(c=>{const t=LANG==="oc"?((byId[c.id]&&byId[c.id].f)?byId[c.id].f.oc:c.oc):c.fr; show(c.mk,!(sel&&listOpen)&&z<12.5&&(!sel||sel.p.id!==c.id)&&fits(c.mk.getLatLng(),t,c.big?19:16,14),cityLayer)});
+  {const onRv=LAY.rv&&!(sel&&listOpen); if(onRv&&plain()){if(!map.hasLayer(rvLines)) rvLines.addTo(map)} else if(map.hasLayer(rvLines)) map.removeLayer(rvLines);
+   RV.forEach(r=>{const t=(LANG==="oc"?r.oc:r.fr)||r.fr; if(r._t!==t){r.mk.setIcon(rvIcon(t)); r._t=t}
+     show(r.mk,onRv&&z>=8&&b.contains(r.mk.getLatLng())&&fits(r.mk.getLatLng(),t,12.5,6),rvLabLayer)})}
   items.forEach(it=>{if(it===sel) return; const t=LANG==="oc"&&!it.f?"":nameA(it);
     show(it.mk,!(sel&&listOpen)&&!!t&&LAY.labs&&z>=10.25&&b.contains(it.mk.getLatLng())&&!(z<12.5&&CITIES.some(c=>c.id===it.p.id))&&fits(it.mk.getLatLng(),t,13,8),labLayer)});
   const ord=["r","h","m","e","b"];
@@ -1113,6 +1157,17 @@ function shareIt(it){const url=location.origin+location.pathname, /* le lien ouv
                 :q+" 🤔 Découvrez l’origine du nom de votre commune sur la carte des noms occitans de Dordogne 👉", url)}
 function shareApp(){shareMsg("Noms occitans des communes de Dordogne",
   "D’où vient le nom de votre commune ? 🤔 Cette appli raconte l’origine du nom de chaque commune de Dordogne, avec son nom occitan à écouter 🔊 Cherchez la vôtre 👉", location.origin+location.pathname)}
+/* ---------- Le livre et le soutien à Novelum ---------- */
+const LIVRE_URL="https:\/\/www.novelum-ieo24.fr/product-page/dictionnaire-toponymique-des-communes-de-dordogne";
+const DON_URL="https:\/\/www.helloasso.com/associations/novelum-ieo-perigord/formulaires/1";   /* adresse du formulaire de don HelloAsso : à remplir ; vide = bouton caché */
+const BOOK_ICO='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>';
+const HEART_ICO='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
+function soutienHTML(){return `<div class="soutien">
+  <a class="bookcard" href="${LIVRE_URL}" target="_blank" rel="noopener"><img src="img/livre-dico.jpg" alt="Couverture du Dictionnaire toponymique des communes de Dordogne" width="92" height="137" loading="lazy">
+   <span><b>Pour aller plus loin</b>Toutes les communes, leurs formes anciennes et l’histoire de leur nom : <i>Dictionnaire toponymique des communes de Dordogne</i>, Jean Roux (Novelum – Lo Congrès)<em>Se procurer le livre →</em></span></a>
+  ${DON_URL?`<div class="doncard"><div class="donhead">${HEART_ICO}<b>Soutenez cette initiative</b></div>
+   <p>Cette carte est gratuite, sans publicité, et réalisée par une petite association, Novelum – IEO Perigòrd. Si elle vous a appris quelque chose, aidez-nous à la faire vivre.</p>
+   <a class="donbtn2" href="${DON_URL}" target="_blank" rel="noopener">${HEART_ICO} Faire un don</a></div>`:""}</div>`}
 /* ---------- « Une question, une remarque ? » : e-mail direct à Novelum (Web3Forms) ---------- */
 const ASK_KEY="3f2bd908-2497-4a56-9507-c7215d606d73";
 let askFrom=null;
@@ -1211,6 +1266,7 @@ function openFull(it,sync){
        <button class="ghost edit" data-edit>✎ Modifier</button></div></div>
    <div class="body">${els}
      <div class="src"><b>Source</b> : Jean Roux, <i>Dictionnaire toponymique des communes de Dordogne</i>, édition préparée par Jean-Louis Lévêque et Etienne Roux, Novelum – IEO Perigòrd & Lo Congrès permanent de la lenga occitana, 2020${f.els[0]&&f.els[0].page?", p. "+esc(f.els[0].page):""}.<br>Enregistrement : collection Novelum, locuteur non nommé.</div>
+     ${soutienHTML()}
      <button class="asklink" data-ask type="button">✉️ Une question, une remarque sur ce nom ?</button></div>`;
   full.classList.add("on"); full.querySelector(".x").onclick=closeFull; {const a=full.querySelector("[data-ask]"); if(a) a.onclick=()=>openAsk(it)} full.querySelector("[data-edit]").onclick=()=>openEdit(it);
   full.querySelectorAll("[data-play]").forEach(pb=>pb.onclick=()=>playBtn(pb,it.snd[+pb.dataset.play].f));
@@ -1594,6 +1650,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!help.hidden) $("#h
 function openInfo(which){showMap(); document.body.classList.add("pageview"); closeCard(); const pg=$("#info"); pg.classList.add("on"); $("#infoUsage").hidden=which!=="usage"; $("#infoLegal").hidden=which!=="legal"; $("#infoMobile").hidden=which!=="mobile"; $("#vMob").setAttribute("aria-pressed",which==="mobile"); if(which==="mobile") $("#vMap").setAttribute("aria-pressed","false"); pg.scrollTop=0; $("#infoBack").focus()}
 {const sb=$("#srcBtn"); sb.onclick=()=>{const o=sb.parentNode.classList.toggle("open"); sb.setAttribute("aria-expanded",o)}}
 $("#vMob").onclick=()=>openInfo("mobile");
+document.querySelectorAll("[data-livre]").forEach(a=>a.href=LIVRE_URL);
+document.querySelectorAll("[data-don]").forEach(a=>{if(DON_URL){a.href=DON_URL; a.hidden=false; a.innerHTML=(a.classList.contains("donhelp")?HEART_ICO+" ":"")+a.innerHTML} });
+document.querySelectorAll("[data-donwrap]").forEach(w=>w.hidden=!DON_URL);
 document.querySelectorAll("[data-shareapp]").forEach(b=>{b.innerHTML=b.innerHTML.replace("${SHARE_ICO_TXT}",SHARE_ICO); b.onclick=shareApp});
 ["#vMap","#vList","#vPron"].forEach(id=>$(id).addEventListener("click",()=>$("#vMob").setAttribute("aria-pressed","false")));
 $("#lnkUsage").onclick=()=>openInfo("usage"); $("#lnkLegal").onclick=()=>openInfo("legal");
